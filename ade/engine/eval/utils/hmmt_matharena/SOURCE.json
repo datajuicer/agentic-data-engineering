@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/mlfoundations/evalchemy.git",
+  "commit": "d49ba7e8b16172e5ab8d714dd9cb0ae43ec841e9",
+  "path": "eval/chat_benchmarks/HMMT/matharena",
+  "license": "MIT",
+  "local_patches": [
+    "Use package-relative imports under ade.engine.eval.",
+    "Use SymPy's lark LaTeX backend to avoid the ANTLR 4.11 conflict with OmegaConf's required ANTLR 4.9 runtime.",
+    "Apply behavior-neutral Ruff cleanup for unused names and bare exception handlers."
+  ]
+}

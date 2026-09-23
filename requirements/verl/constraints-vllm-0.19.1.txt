@@ -1,0 +1,5 @@
+torch==2.10.0
+vllm==0.19.1
+ray==2.55.1
+transformers==4.56.1
+TransferQueue==0.1.8

@@ -1,0 +1,301 @@
+# Example matrix: replace synthetic Run IDs, deployment names and checkpoint paths with your accepted artifacts.
+schema_version: 2
+evaluation_id: audit-best-generalization-v1
+seed: 42
+evaluation_role: generalization_test
+runtime: runtime/canonical-8gpu-coordinator.yaml
+suites:
+  - id: sft-math
+    task_type: data_selection
+    task: tasks/formal-long-cot-data-selection.yaml
+    eval: eval/sft-formal-validation.yaml
+    prompt_contract:
+      system_prompt:
+        id: sft_general.v1
+        digest: 7cbf9a28af56f040e15c42666f3f6a1509eb034572b993d4f4d96b8cc59da340
+      chat_template:
+        id: native_chat_template.v1
+        digest: cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f
+    metrics: {primary: pass_at_k, secondary: avg_at_k}
+    checkpoints:
+      - id: base
+        variant: base
+        subject_ref: openthoughts-math-sft-data-selection-baseline-formal-canonical-old-20000101T000000Z-000011/c000/p000/base
+        path: models/Qwen2.5-7B-Instruct
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      - id: surrogate_locked_baseline
+        variant: baseline
+        subject_ref: openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000009/c000/p000/p000-t000-baseline
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000009/c000/p000/p000-t000-baseline/attempt-001/checkpoints/epoch-009
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n1-00000d
+        variant: n1
+        subject_ref: openthoughts-math-sft-data-selection-ADE-formal-20000101T000000Z-00000d/c001/p005/t001
+        path: runs/deployments/deployment-example-22/engine-work/trial_artifacts/openthoughts-math-sft-data-selection-ADE-formal-20000101T000000Z-00000d/c001/p005/t001/attempt-001/checkpoints/epoch-006
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n1-000006
+        variant: n1
+        subject_ref: openthoughts-math-sft-data-selection-ADE-formal-n1-20000101T000000Z-000006/c001/p001/t001
+        path: runs/deployments/deployment-example-20/engine-work/trial_artifacts/openthoughts-math-sft-data-selection-ADE-formal-n1-20000101T000000Z-000006/c001/p001/t001/attempt-001/checkpoints/epoch-005
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n1-00000c
+        variant: n1
+        subject_ref: openthoughts-math-sft-data-selection-ADE-formal-n1-20000101T000000Z-00000c/c001/p002/t001
+        path: runs/deployments/deployment-example-20/engine-work/trial_artifacts/openthoughts-math-sft-data-selection-ADE-formal-n1-20000101T000000Z-00000c/c001/p002/t001/attempt-001/checkpoints/epoch-005
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n3-000001
+        variant: n3
+        subject_ref: openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000001/c003/p001/t001
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000001/c003/p001/t001/attempt-001/checkpoints/epoch-004
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n3-000015
+        variant: n3
+        subject_ref: openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000015/c001/p004/t001
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000015/c001/p004/t001/attempt-001/checkpoints/epoch-005
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n3-000003
+        variant: n3
+        subject_ref: openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000003/c002/p001/t001
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-math-sft-data-selection-ADE-formal-n3-20000101T000000Z-000003/c002/p001/t001/attempt-001/checkpoints/epoch-004
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+    datasets:
+      - {id: math_val, samples_per_input: 3, family: math}
+      - {id: math_500, samples_per_input: 3, family: math}
+      - {id: aime26, samples_per_input: 32, family: contest}
+      - {id: hmmt, samples_per_input: 32, family: contest}
+
+  - id: sft-code
+    task_type: data_selection
+    task: tasks/formal-long-cot-data-selection-code.yaml
+    eval: eval/sft-formal-validation.yaml
+    prompt_contract:
+      system_prompt:
+        id: sft_general.v1
+        digest: 7cbf9a28af56f040e15c42666f3f6a1509eb034572b993d4f4d96b8cc59da340
+      chat_template:
+        id: native_chat_template.v1
+        digest: cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f
+    metrics: {primary: pass_at_k, secondary: avg_at_k}
+    checkpoints:
+      - id: base
+        variant: base
+        subject_ref: openthoughts-code-sft-data-selection-baseline-formal-20000101T000000Z-000008/c000/p000/base
+        path: models/Qwen2.5-7B-Instruct
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      - id: baseline
+        variant: baseline
+        subject_ref: openthoughts-code-sft-data-selection-baseline-formal-20000101T000000Z-000008/c000/p000/p000-t000-baseline
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-code-sft-data-selection-ADE-formal-n3-20000101T000000Z-000016/c000/p000/p000-t000-baseline/attempt-001/checkpoints/epoch-007
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n1-000012
+        variant: n1
+        subject_ref: openthoughts-code-sft-data-selection-ADE-formal-20000101T000000Z-000012/c001/p003/t001
+        path: runs/deployments/deployment-example-21/engine-work/trial_artifacts/openthoughts-code-sft-data-selection-ADE-formal-20000101T000000Z-000012/c001/p003/t001/attempt-001/checkpoints/epoch-006
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n1-000004
+        variant: n1
+        subject_ref: openthoughts-code-sft-data-selection-ADE-formal-n1-20000101T000000Z-000004/c001/p005/t001
+        path: runs/deployments/deployment-example-21/engine-work/trial_artifacts/openthoughts-code-sft-data-selection-ADE-formal-n1-20000101T000000Z-000004/c001/p005/t001/attempt-001/checkpoints/epoch-005
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n1-000007
+        variant: n1
+        subject_ref: openthoughts-code-sft-data-selection-ADE-formal-n1-20000101T000000Z-000007/c001/p002/t001
+        path: runs/deployments/deployment-example-21/engine-work/trial_artifacts/openthoughts-code-sft-data-selection-ADE-formal-n1-20000101T000000Z-000007/c001/p002/t001/attempt-001/checkpoints/epoch-004
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n3-000016
+        variant: n3
+        subject_ref: openthoughts-code-sft-data-selection-ADE-formal-n3-20000101T000000Z-000016/c001/p004/t001
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-code-sft-data-selection-ADE-formal-n3-20000101T000000Z-000016/c001/p004/t001/attempt-001/checkpoints/epoch-006
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n3-00000a
+        variant: n3
+        subject_ref: openthoughts-code-sft-data-selection-ADE-formal-20000101T000000Z-00000a/c002/p004/t001
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-code-sft-data-selection-ADE-formal-20000101T000000Z-00000a/c002/p004/t001/attempt-001/checkpoints/epoch-005
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+      - id: n3-000010
+        variant: n3
+        subject_ref: openthoughts-code-sft-data-selection-ADE-formal-20000101T000000Z-000010/c001/p003/t001
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/openthoughts-code-sft-data-selection-ADE-formal-20000101T000000Z-000010/c001/p003/t001/attempt-001/checkpoints/epoch-005
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+    datasets:
+      - {id: humaneval_plus, samples_per_input: 3, family: code}
+      - {id: mbpp_plus, samples_per_input: 3, family: code}
+      - {id: codeelo, samples_per_input: 3, family: code}
+      - {id: codeforces, samples_per_input: 3, family: code}
+
+  - id: rft-math
+    task_type: reward_design
+    task: tasks/formal-math-reward-design.yaml
+    eval: eval/rft-formal-validation.yaml
+    prompt_contract:
+      system_prompt:
+        id: rft_qwen_default.v1
+        digest: 66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e
+      chat_template:
+        id: native_chat_template.v1
+        digest: 44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5
+    metrics: {primary: avg_at_k, secondary: pass_at_k}
+    checkpoints:
+      - id: base
+        variant: base
+        subject_ref: math-math-rft-reward-design-baseline-formal-20000101T000000Z-000013/c000/p000/base
+        path: models/Qwen2.5-0.5B
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      - id: baseline
+        variant: baseline
+        subject_ref: math-math-rft-reward-design-baseline-formal-20000101T000000Z-000013/c000/p000/p000-t000-baseline
+        path: runs/deployments/deployment-example-20/engine-work/trial_artifacts/math-math-rft-reward-design-baseline-formal-20000101T000000Z-000013/c000/p000/p000-t000-baseline/attempt-001/checkpoints/rl-step-092
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      - id: n1-000002
+        variant: n1
+        subject_ref: math-math-rft-reward-design-ADE-formal-100-step-n1-20000101T000000Z-000002/c001/p001/t001
+        path: runs/deployments/deployment-example-20/engine-work/trial_artifacts/math-math-rft-reward-design-ADE-formal-100-step-n1-20000101T000000Z-000002/c001/p001/t001/attempt-001/checkpoints/rl-step-096
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      - id: n1-00000e
+        variant: n1
+        subject_ref: math-math-rft-reward-design-ADE-formal-20000101T000000Z-00000e/c001/p004/t001
+        path: runs/deployments/deployment-example-21/engine-work/trial_artifacts/math-math-rft-reward-design-ADE-formal-20000101T000000Z-00000e/c001/p004/t001/attempt-001/checkpoints/rl-step-100
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      - id: n1-00000b
+        variant: n1
+        subject_ref: math-math-rft-reward-design-ADE-formal-n1-20000101T000000Z-00000b/c001/p005/t001
+        path: runs/deployments/deployment-example-20/engine-work/trial_artifacts/math-math-rft-reward-design-ADE-formal-n1-20000101T000000Z-00000b/c001/p005/t001/attempt-001/checkpoints/rl-step-100
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      - id: n3-000014
+        variant: n3
+        subject_ref: math-math-rft-reward-design-ADE-formal-100-step-n3-20000101T000000Z-000014/c001/p002/t001
+        path: runs/deployments/deployment-example-99/engine-work/trial_artifacts/math-math-rft-reward-design-ADE-formal-100-step-n3-20000101T000000Z-000014/c001/p002/t001/attempt-001/checkpoints/rl-step-100
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+    datasets:
+      - {id: aime24, samples_per_input: 3, family: contest}
+      - {id: aime25, samples_per_input: 3, family: contest}
+      - {id: aime26, samples_per_input: 3, family: contest}
+      - {id: hmmt, samples_per_input: 3, family: contest}

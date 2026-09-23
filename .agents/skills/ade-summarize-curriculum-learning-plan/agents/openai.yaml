@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ade Summarize Curriculum Learning Plan"
+  short_description: "Help with Ade Summarize Curriculum Learning Plan tasks"
+  default_prompt: "Use $ade-summarize-curriculum-learning-plan to update the accepted Curriculum Learning Plan memory."
+policy:
+  allow_implicit_invocation: false

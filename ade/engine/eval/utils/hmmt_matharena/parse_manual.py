@@ -1,0 +1,6 @@
+"""Vendored MathArena manual parser mappings."""
+
+manual_mapper = {
+    r"0,\; 18^{1/3}e^{i\pi/3},\; -18^{1/3},\; 18^{1/3}e^{-i\pi/3}": "0",
+    "00009 \\sqrt{15}": "9\\sqrt{15}",
+}

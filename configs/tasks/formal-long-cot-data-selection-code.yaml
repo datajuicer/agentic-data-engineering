@@ -1,0 +1,21 @@
+schema_version: 1
+name: canonical-code-data-selection-sft-formal
+task_name: code-data-selection
+objective: Select from the fixed OpenThoughts slice and run the formal 7B code SFT experiment.
+select_size: 384
+base_model: models/Qwen2.5-7B-Instruct
+base_model_protocol:
+  thinking:
+    mode: disabled
+    reasoning_parser: none
+prompt_protocol:
+  mode: chat_template
+  system_prompt: sft_general.v1
+data:
+  fixed_training_data: data/sft/openthoughts/openthoughts_mcs_3840_proportional.jsonl
+  pool_size: 3840
+  dataset_name: openthoughts_mcs_3840_proportional
+  validation: [livecodebench_le_2024_03_30]
+  test: [livecodebench_gt_2024_03_30]
+sft:
+  recipe_path: configs/train/sft-llamafactory-full.yaml

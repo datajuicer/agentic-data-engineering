@@ -1,0 +1,21 @@
+schema_version: 1
+name: rft-formal-validation
+eval:
+  enabled: true
+  purposes:
+    online:
+      samples_per_input: 1
+      decoding: {mode: sampling, temperature: 0.6, top_p: 0.95}
+      ranking: {primary: macro_avg_at_configured_k, secondary: macro_pass_at_configured_k, weights: {math_val: 1.0}}
+    offline:
+      samples_per_input: 3
+      decoding: {mode: sampling, temperature: 0.6, top_p: 0.95}
+      ranking: {primary: macro_avg_at_configured_k, secondary: macro_pass_at_configured_k, weights: {math_val: 1.0}}
+    operator:
+      samples_per_input: 3
+      decoding: {mode: sampling, temperature: 0.6, top_p: 0.95}
+  max_model_len: 32768
+  max_new_tokens: 16384
+  thinking_budget: -1
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 64

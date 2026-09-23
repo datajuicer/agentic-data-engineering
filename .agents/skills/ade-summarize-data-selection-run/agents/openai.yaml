@@ -1,0 +1,6 @@
+interface:
+  display_name: "Summarize Long-CoT SFT Run"
+  short_description: "Summarize one Long-CoT SFT selection run"
+  default_prompt: "Use $ade-summarize-data-selection-run to summarize the supplied Long-CoT SFT run view."
+policy:
+  allow_implicit_invocation: false

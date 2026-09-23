@@ -1,0 +1,30 @@
+schema_version: 1
+name: sft-general-micro
+train:
+  output_model_protocol:
+    thinking:
+      mode: tagged
+      tag_encoding: special_tokens
+      activation: learned
+      open_tag: <think>
+      close_tag: </think>
+      reasoning_parser: qwen3
+  add_special_tokens: <think>,</think>
+  resize_vocab: true
+  num_train_epochs: 13
+  early_stopping_patience: 4
+  checkpoint_ready_stable_seconds: 10
+  artifact_interval: 1
+  cutoff_len: 16384
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  logging_steps: 1
+  save_strategy: epoch
+  eval_strategy: "no"
+  report_to: none
+  learning_rate: 1.0e-5
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.1
+  bf16: true
+  save_total_limit: null
+  checkpoint_retention_top_k: -1

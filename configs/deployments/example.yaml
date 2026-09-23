@@ -1,0 +1,45 @@
+# Copy to local.yaml and replace the example host, model and executable paths.
+# YAML does not expand shell variables. This file does not start services.
+schema_version: 1
+name: ade-example
+run_resources:
+  ray_cluster:
+    cluster_id: ade-example
+    address: 192.0.2.10:6379
+    exclusive_ade_run: true
+  local_judge:
+    enabled: true
+    gpu_count: 8
+    model_path: models/Qwen3.6-35B-A3B
+    model_digest: Qwen3.6-35B-A3B
+    gateway_port: 8899
+    protocol: ade.rubric_jobs.v1
+    authorization_env: ADE_LOCAL_JUDGE_AUTHORIZATION
+    vllm:
+      executable: /opt/ade/.unified-vllm-0.19.1-verl-venv/bin/ade-judge-vllm
+      environment: {}
+      gpu_memory_utilization: 0.90
+      max_model_len: 32768
+      max_num_seqs: 448
+      max_num_batched_tokens: 65536
+      enable_prefix_caching: true
+      reasoning_parser: qwen3
+      gdn_prefill_backend: triton
+      launch_stagger_seconds: 3
+    generation:
+      per_endpoint_concurrency: 16
+      max_tokens: 512
+      temperature: 0.0
+      top_p: 1.0
+      enable_thinking: false
+    failure_policy:
+      row_failure: deterministic_fallback
+      job_failure: command_failed
+      engine_retry: false
+      provider_fallback: false
+    timeout_policy:
+      readiness_seconds: 1800
+      request_timeout_seconds: 120
+    circuit_policy:
+      max_failed_row_ratio: 0.1
+      max_consecutive_unhealthy_jobs: 1

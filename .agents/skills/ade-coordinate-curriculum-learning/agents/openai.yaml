@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ade Coordinate Curriculum Learning"
+  short_description: "Help with Ade Coordinate Curriculum Learning tasks"
+  default_prompt: "Use $ade-coordinate-curriculum-learning to propose one falsifiable static problem-schedule intervention."
+policy:
+  allow_implicit_invocation: false

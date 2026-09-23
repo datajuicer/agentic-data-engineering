@@ -1,0 +1,6 @@
+interface:
+  display_name: "Summarize GRPO RFT Reward Run"
+  short_description: "Summarize one GRPO RFT reward-design run"
+  default_prompt: "Use $ade-summarize-reward-design-run to summarize the supplied GRPO RFT reward-design run."
+policy:
+  allow_implicit_invocation: false

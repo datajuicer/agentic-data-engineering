@@ -1,0 +1,6 @@
+interface:
+  display_name: "Coordinate GRPO RFT Reward"
+  short_description: "Write one directional GRPO reward plan"
+  default_prompt: "Use $ade-coordinate-reward-design to write one evidence-based directional GRPO RFT plan, leaving implementation details to the Artifact Builder."
+policy:
+  allow_implicit_invocation: false

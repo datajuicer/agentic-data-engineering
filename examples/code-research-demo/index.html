@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#153e35">
+  <meta name="description" content="Explore a real ADE research trajectory: one run, three collaborating agents, and a better way to select training data.">
+  <title>ADE — A study in shared discovery</title>
+  <link rel="icon" href="mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="case-data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#research" data-i18n="skip">Skip to research explorer</a>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="ADE home"><img src="mark.svg" alt="" width="35" height="35"><span>ADE<span class="brand-sub">RESEARCH ATLAS</span></span></a>
+    <nav aria-label="Main navigation"><a href="#research" data-i18n="navExplore">The experiments</a><a href="#insights" data-i18n="navLearn">What changed</a><a href="#method" data-i18n="navMethod">The setup</a></nav>
+  </header>
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-star">✳</span> <span data-i18n="heroLabel">A FIELD STUDY IN AGENTIC DATA ENGINEERING</span></div>
+        <h1 data-i18n-html="heroTitle">Better data.<br>Through <em>shared<br>discovery.</em></h1>
+        <p class="hero-description" data-i18n="heroDescription">Follow three research agents as they test, learn, and build on each other’s findings. One code data-selection run. Fifteen Plans that build on shared findings.</p>
+        <div class="hero-actions"><a class="button primary" href="#research"><span data-i18n="explore">Explore the research</span><span aria-hidden="true">↗</span></a><span class="quiet-note"><span class="live-dot"></span><span data-i18n="recorded">An interactive, recorded case</span></span></div>
+      </div>
+      <div class="hero-art" aria-label="The selected strategy and the findings that informed it">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+        <div class="art-kicker"><span>01 — CODE DATA SELECTION</span><span class="art-cross">＋</span></div>
+        <div class="floating-tag tag-one"><span class="tag-dot cobalt"></span><span data-i18n="lengthMatch">Match the length</span><span class="tag-code">K2</span></div>
+        <div class="floating-tag tag-two"><span class="tag-dot copper"></span><span data-i18n="signal">Make the signal observable</span><span class="tag-code">K3</span></div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-label" data-i18n="selectedStrategy">SELECTED STRATEGY</span><span class="star-stamp">✳</span></div>
+          <div class="specimen-plan">C1 / P3</div>
+          <h2 data-i18n="winnerTitle">Stratified<br>repetition control</h2>
+          <div class="specimen-rule"></div>
+          <div class="specimen-score"><span>48.06<small>%</small></span><div><b>PASS@3</b><small data-i18n="inloop">In-loop validation</small></div></div>
+          <div class="specimen-gain"><span>↗ +8.20 <span data-i18n="pp">pp</span></span><span data-i18n="overBaseline">over the baseline</span></div>
+          <svg class="specimen-spark" viewBox="0 0 280 42" role="img" aria-label="Best validation score improves over completed Plans"><path id="hero-spark" d=""/><circle cx="270" cy="7" r="3"/></svg>
+        </div>
+        <div class="art-footer"><span data-i18n="sharedPool">SAME POOL. SHARED KNOWLEDGE.</span><span class="mini-grid" aria-hidden="true">▦</span></div>
+      </div>
+    </section>
+    <section class="stats-strip wrap" aria-label="Experiment facts">
+      <div><strong>3</strong><span data-i18n="statsAgents">Coordinators<br>exploring in parallel</span></div>
+      <div><strong>15</strong><span data-i18n="statsPlans">Plans<br>with shared findings</span></div>
+      <div><strong>384<span class="stat-small"> / 3,840</span></strong><span data-i18n="statsData">Selected trajectories<br>from one fixed pool</span></div>
+      <div><strong>+6.35<span class="stat-small"> pp</span></strong><span data-i18n="statsHeldout">Operator-test Pass@3<br>over the baseline</span></div>
+    </section>
+
+    <section class="research-section" id="research">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow" data-i18n="sectionOne">01 / THE RESEARCH EXPLORER</div><h2 data-i18n-html="researchTitle">Every experiment leaves<br><em>something to learn.</em></h2></div><p data-i18n="researchDescription">Trace the strategies that were inherited, and the ideas that travelled further. Select any experiment to look inside.</p></div>
+        <div class="research-toolbar">
+          <div class="segmented" role="group" aria-label="Relationship view"><button data-view="ancestry" class="active" aria-pressed="true" data-i18n="ancestry">Strategy ancestry</button><button data-view="knowledge" aria-pressed="false" data-i18n="knowledge">Knowledge transfer</button></div>
+          <div class="replay-controls"><button id="play" class="icon-button" aria-label="Replay completed Plans"><span id="play-icon">▶</span><span id="play-label" data-i18n="replay">Replay</span></button><input type="range" id="timeline" min="0" max="15" value="15" aria-label="Completed Plans"><span id="replay-count">15 / 15</span><button id="reset" class="reset-button" aria-label="Show all Plans">↺</button></div>
+        </div>
+        <div class="board-scroll"><div class="board" id="board"><svg id="connections" class="connections" aria-hidden="true"></svg><div id="lanes"></div></div></div>
+        <div class="board-footer"><span><i class="legend-line"></i><span id="connection-legend" data-i18n="ancestryLegend">Recorded strategy inheritance · select a card to trace its connections</span></span><span data-i18n="boardNote">Columns are local Plan order, not synchronized rounds.</span></div>
+        <p id="replay-status" class="replay-status" aria-live="polite"></p>
+
+        <div class="progress-panel">
+          <div class="progress-copy"><span class="eyebrow" data-i18n="progressLabel">THE SEARCH, AS IT UNFOLDED</span><h3 data-i18n="progressTitle">Progress is rarely a straight line.</h3><p data-i18n="progressDescription">Some experiments improve the score. Others improve the next question.</p><div class="chart-legend"><span><i class="dot green"></i><span data-i18n="bestSoFar">Best so far</span></span><span><i class="dot muted"></i><span data-i18n="trialScore">Experiment</span></span><span><i class="dash"></i><span data-i18n="baseline">Baseline</span></span></div></div>
+          <div class="progress-chart" id="progress-chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-section wrap" id="experiment" aria-labelledby="detail-heading">
+      <div class="detail-heading"><div><span class="eyebrow" data-i18n="sectionTwo">02 / INSIDE THE EXPERIMENT</span><div class="detail-title-line"><span id="detail-id" class="plan-pill"></span><h2 id="detail-heading"></h2></div></div><span id="winner-badge" class="winner-badge" data-i18n="selectedByValidation">✳ Selected by validation</span></div>
+      <div class="detail-layout">
+        <div class="detail-story"><p class="detail-intro" id="detail-description"></p><div class="story-block"><span class="story-number">01</span><div><h3 data-i18n="questionLabel">The question</h3><p id="detail-question"></p></div></div><div class="story-block"><span class="story-number">02</span><div><h3 data-i18n="changeLabel">The intervention</h3><p id="detail-change"></p></div></div><div class="story-block"><span class="story-number">03</span><div><h3 data-i18n="lessonLabel">What it taught the search</h3><p id="detail-lesson"></p></div></div><div class="parent-box"><span data-i18n="builtFrom">BUILT FROM</span><div id="detail-parents"></div></div><div class="hypothesis-note"><span id="hypothesis-dot"></span><div><strong id="hypothesis-status"></strong><p data-i18n="hypothesisNote">Hypothesis assessment is separate from score-based selection.</p></div></div></div>
+        <div class="evidence-panel">
+          <div class="scorecards"><div><span data-i18n="validationPass">Validation · Pass@3</span><strong id="detail-pass"></strong><small id="detail-delta"></small></div><div><span data-i18n="validationAvg">Validation · Average@3</span><strong id="detail-average"></strong><small data-i18n="sameProtocol">Same evaluation protocol</small></div></div>
+          <div class="curve-toolbar"><div class="segmented compact" role="group" aria-label="Training chart"><button data-curve="loss" class="active" aria-pressed="true" data-i18n="loss">Training loss</button><button data-curve="validation" aria-pressed="false" data-i18n="online">Online validation</button></div><label class="compare-label"><input type="checkbox" id="compare" checked><span data-i18n="compareParent">Compare parent</span></label></div>
+          <div class="training-chart" id="training-chart"></div>
+          <div class="curve-meta"><span id="curve-stop"></span><span id="checkpoint-tag"></span></div>
+          <div id="curve-legend" class="chart-legend"></div>
+          <p class="curve-caption" id="curve-caption"></p>
+          <div class="heldout-box"><div><span class="eyebrow" data-i18n="heldoutLabel">OPERATOR TEST · LATER LIVECODEBENCH SPLIT</span><p data-i18n="heldoutNote">Held out from strategy selection.</p></div><strong id="detail-heldout"></strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="insight-section" id="insights"><div class="wrap"><div class="section-heading"><div><div class="eyebrow" data-i18n="sectionThree">03 / KNOWLEDGE THAT CROSSED BRANCHES</div><h2 data-i18n-html="insightTitle">A better answer starts with<br><em>a better question.</em></h2></div><p data-i18n="insightDescription">The selected strategy inherited one subset. Its reasoning drew on several experiments.</p></div><div class="insight-grid" id="insight-grid"></div><div class="insight-bottom"><span class="insight-star">✳</span><p data-i18n="insightBottom">After C1/P3 became the leader, all three Coordinators revisited it—testing wrapper closure, example correctness, earlier code, and image-marker removal.</p><button class="text-button" id="show-followups"><span data-i18n="followups">See the follow-up experiments</span> ↗</button></div></div></section>
+
+    <section class="method-section wrap" id="method"><div><div class="eyebrow" data-i18n="sectionFour">04 / THE EXPERIMENTAL SETUP</div><h2 data-i18n-html="methodTitle">Change the selection.<br><em>Hold the rest steady.</em></h2><p data-i18n="methodDescription">Each strategy selects complete trajectories from the same mixed-domain OpenThoughts pool. The target model, training recipe, and evaluation protocol stay fixed.</p><button class="button secondary" id="download"><span data-i18n="download">Download the displayed data</span> ↓</button></div><div class="method-table"><div><span data-i18n="targetModel">Target model</span><strong>Qwen2.5-7B-Instruct</strong></div><div><span data-i18n="trainingPool">Training pool</span><strong data-i18n="poolValue">3,840 OpenThoughts trajectories</strong></div><div><span data-i18n="selectionBudget">Selection budget</span><strong data-i18n="budgetValue">384 whole trajectories per Trial</strong></div><div><span data-i18n="selectionSignal">Strategy selection</span><strong data-i18n="signalValue">In-loop Pass@3; Average@3 breaks ties</strong></div><div><span data-i18n="trainingEnd">Training</span><strong data-i18n="endValue">Recorded steps · early stopping</strong></div><div><span data-i18n="baseline">Baseline</span><strong id="baseline-summary"></strong></div></div></section>
+  </main>
+  <footer class="site-footer wrap"><a class="brand" href="#"><img src="mark.svg" alt="" width="29" height="29"><span>ADE</span></a><p data-i18n="footer">Agentic Data Engineering · A real research trajectory, made explorable.</p><a href="#" data-i18n="backTop">Back to top ↑</a></footer>
+  <div id="chart-tooltip" class="chart-tooltip" role="status" hidden></div>
+  <noscript><p class="noscript">Enable JavaScript to explore the recorded research and curves. No network connection is required.</p></noscript>
+</body>
+</html>

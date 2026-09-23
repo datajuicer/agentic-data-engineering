@@ -1,0 +1,4 @@
+interface:
+  display_name: "ADE Supervise Run"
+  short_description: "Start, monitor, recover, and close one ADE Run"
+  default_prompt: "Use $ade-supervise-run to supervise the ADE Run selected by this Operation Prompt through terminal acceptance."

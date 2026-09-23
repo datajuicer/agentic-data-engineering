@@ -1,0 +1,383 @@
+schema_version: 1
+ranking_policies:
+  sft:
+    primary: macro_pass_at_configured_k
+    secondary: macro_avg_at_configured_k
+  rft:
+    primary: macro_avg_at_configured_k
+    secondary: macro_pass_at_configured_k
+ranking_weights:
+  math:
+    aime24: 0.5
+    math_100: 0.5
+  code:
+    livecodebench_le_2024_03_30: 1.0
+
+benchmarks:
+  aime24:
+    display_name: AIME 2024
+    domain: math
+    usage: validation
+    source:
+      type: huggingface
+      path: math-ai/aime24
+      revision: 83a7f387baaa524a8bda0022eac0541582297103
+    artifact:
+      path: data/benchmarks/aime24
+      split: test
+      expected_rows: 30
+    task: aime24
+    protocol: aime24.v1
+    profiles:
+      online_eval: {num_samples: 8}
+      offline_validation: {num_samples: 32}
+      operator_test: {num_samples: 32}
+
+  aime24_smoke16:
+    display_name: AIME 2024 smoke 16
+    domain: math
+    usage: validation
+    source:
+      type: derived_local
+      revision: 83a7f387baaa524a8bda0022eac0541582297103
+    artifact:
+      path: data/benchmarks/aime24-smoke16
+      split: test
+      expected_rows: 16
+    task: aime24_smoke16
+    protocol: aime24.v1
+    derived_from: aime24
+    build:
+      method: deterministic_sample
+      seed: 42
+      size: 16
+      id_manifest: configs/benchmarks/ids/aime24_smoke16.txt
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  math_val_smoke16:
+    display_name: Math validation smoke 16
+    domain: math
+    usage: validation
+    source:
+      type: derived_local
+      revision: simplelr-abel-level1to4-train3072-val500-seed42
+    artifact:
+      path: data/benchmarks/math-val-smoke16.parquet
+      split: validation
+      expected_rows: 16
+    task: math_val_smoke16
+    protocol: math_val.v1
+    derived_from: math_val
+    build:
+      method: deterministic_sample
+      seed: 42
+      size: 16
+      id_manifest: configs/benchmarks/ids/math_val_smoke16.txt
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  math_100:
+    display_name: MATH 100 subset
+    domain: math
+    usage: validation
+    source:
+      type: huggingface
+      path: HuggingFaceH4/MATH-500
+      revision: 6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be
+    artifact:
+      path: data/benchmarks/math-100
+      split: test
+      expected_rows: 100
+    task: math_100
+    protocol: math500.v1
+    derived_from: math_500
+    overlap_with_test_allowed: true
+    build:
+      method: deterministic_sample
+      seed: 42
+      size: 100
+      id_manifest: configs/benchmarks/ids/math_100.txt
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  math_val:
+    display_name: MATH train validation aligned to MATH500
+    domain: math
+    usage: validation
+    source:
+      type: derived_local
+      path: EleutherAI/hendrycks_math
+      revision: 21a5633873b6a120296cce3e2df9d5550074f4a3
+      source_split: train
+      target_distribution: math_500
+      seed: 42
+      size: 500
+      split_manifest: data/rft/math/math_train3072_val500_seed42/split.manifest.json
+      paired_train_artifact: data/rft/math/math_train3072_val500_seed42/train.parquet
+      train_size: 3072
+      strata: [level, subject]
+      method: joint_largest_remainder_single_rng_permutation
+    artifact:
+      path: data/benchmarks/math-val/validation.parquet
+      split: test
+      expected_rows: 500
+    task: math_val
+    protocol: math_val.v1
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  math_500:
+    display_name: MATH 500
+    domain: math
+    usage: test
+    source:
+      type: huggingface
+      path: HuggingFaceH4/MATH-500
+      revision: 6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be
+    artifact:
+      path: data/benchmarks/math-500
+      split: test
+      expected_rows: 500
+    task: math_500
+    protocol: math500.v1
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  math_500_smoke16:
+    display_name: MATH 500 smoke 16
+    domain: math
+    usage: test
+    source:
+      type: derived_local
+      revision: 6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be
+    artifact:
+      path: data/benchmarks/math-500-smoke16
+      split: test
+      expected_rows: 16
+    task: math_500_smoke16
+    protocol: math500.v1
+    derived_from: math_500
+    build:
+      method: deterministic_sample
+      seed: 42
+      size: 16
+      id_manifest: configs/benchmarks/ids/math_500_smoke16.txt
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  aime25:
+    display_name: AIME 2025
+    domain: math
+    usage: test
+    source:
+      type: huggingface
+      path: math-ai/aime25
+      revision: 563bb8404243c5f09de6ec262f2db674fe5bce9b
+    artifact:
+      path: data/benchmarks/aime25
+      split: test
+      expected_rows: 30
+    task: aime25
+    protocol: aime25.v1
+    profiles:
+      online_eval: {num_samples: 8}
+      offline_validation: {num_samples: 32}
+      operator_test: {num_samples: 32}
+
+  aime25_smoke16:
+    display_name: AIME 2025 smoke 16
+    domain: math
+    usage: test
+    source:
+      type: derived_local
+      revision: 563bb8404243c5f09de6ec262f2db674fe5bce9b
+    artifact:
+      path: data/benchmarks/aime25-smoke16
+      split: test
+      expected_rows: 16
+    task: aime25_smoke16
+    protocol: aime25.v1
+    derived_from: aime25
+    build:
+      method: deterministic_sample
+      seed: 42
+      size: 16
+      id_manifest: configs/benchmarks/ids/aime25_smoke16.txt
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  aime26:
+    display_name: AIME 2026
+    domain: math
+    usage: test
+    source:
+      type: huggingface
+      path: math-ai/aime26
+      revision: 79037aebdb6580008fb960d17cb21fd3099083e3
+    artifact:
+      path: data/benchmarks/aime26
+      split: test
+      expected_rows: 30
+    task: aime26
+    protocol: aime26.v1
+    profiles:
+      online_eval: {num_samples: 8}
+      offline_validation: {num_samples: 32}
+      operator_test: {num_samples: 32}
+
+  hmmt:
+    display_name: HMMT February 2025
+    domain: math
+    usage: test
+    source:
+      type: huggingface
+      path: MathArena/hmmt_feb_2025
+      revision: 6fdc4277120810ff75aa22d2d5489b91f7a262a1
+    artifact:
+      path: data/benchmarks/hmmt
+      split: train
+      expected_rows: 30
+    task: hmmt
+    protocol: hmmt.v1
+    profiles:
+      online_eval: {num_samples: 8}
+      offline_validation: {num_samples: 32}
+      operator_test: {num_samples: 32}
+
+  livecodebench_le_2024_03_30:
+    display_name: LiveCodeBench v5 through 2024-03-30
+    domain: code
+    usage: validation
+    source:
+      type: huggingface
+      path: livecodebench/code_generation_lite
+      revision: 0fe84c3912ea0c4d4a78037083943e8f0c4dd505
+    artifact:
+      path: data/benchmarks/livecodebench_code_generation_lite_release_v5_le_2024_03_30
+      split: test
+      expected_rows: 439
+      digest: 33569ae7393eb440ff4cd01ed6607130a904e7df2fa9438b30374346d4bbb3dd
+    task: livecodebench_le_2024_03_30
+    protocol: livecodebench_le_2024_03_30.v1
+    build:
+      date_lte: '2024-03-30'
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  livecodebench_gt_2024_03_30:
+    display_name: LiveCodeBench v5 after 2024-03-30
+    domain: code
+    usage: test
+    source:
+      type: huggingface
+      path: livecodebench/code_generation_lite
+      revision: 0fe84c3912ea0c4d4a78037083943e8f0c4dd505
+    artifact:
+      path: data/benchmarks/livecodebench_code_generation_lite_release_v5_gt_2024_03_30
+      split: test
+      expected_rows: 441
+      digest: d5292a6670555078cf1f5c7e866ffa23aac577c009ab111bf0fc7da0e3876796
+    task: livecodebench_gt_2024_03_30
+    protocol: livecodebench_gt_2024_03_30.v1
+    build:
+      date_gt: '2024-03-30'
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  humaneval_plus:
+    display_name: HumanEval+ (164)
+    domain: code
+    usage: test
+    source:
+      type: github
+      path: evalplus/evalplus
+      revision: 26d6d00bb1fd0fa37f39c99d5290da67891d1c5e
+    artifact:
+      path: data/benchmarks/humaneval-plus
+      split: test
+      expected_rows: 164
+    task: humaneval_plus
+    protocol: humaneval_plus.v1
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  mbpp_plus:
+    display_name: MBPP+ (378)
+    domain: code
+    usage: test
+    source:
+      type: github
+      path: evalplus/evalplus
+      revision: 26d6d00bb1fd0fa37f39c99d5290da67891d1c5e
+    artifact:
+      path: data/benchmarks/mbpp-plus
+      split: test
+      expected_rows: 378
+    task: mbpp_plus
+    protocol: mbpp_plus.v1
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  codeelo:
+    display_name: CodeELO
+    domain: code
+    usage: test
+    source:
+      type: huggingface
+      path: Qwen/CodeElo
+      revision: 45a2cbba03bd9d20fbca040c2f7da91b2594c444
+    artifact:
+      path: data/benchmarks/codeelo
+      split: test
+      expected_rows: 408
+    task: codeelo
+    protocol: codeelo.v1
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}
+
+  codeforces:
+    display_name: Codeforces
+    domain: code
+    usage: test
+    source:
+      type: huggingface
+      path: open-r1/codeforces
+      revision: fbe3f6e903ee854eec2e69e9d96d0306cde59baf
+    artifact:
+      path: data/benchmarks/codeforces-runnable
+      split: test
+      expected_rows: 467
+    task: codeforces
+    protocol: codeforces.v1
+    build:
+      runnable_tests_only: true
+      local_source_artifact: data/benchmarks/codeforces
+    profiles:
+      online_eval: {num_samples: 1}
+      offline_validation: {num_samples: 3}
+      operator_test: {num_samples: 3}

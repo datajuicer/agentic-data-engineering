@@ -1,0 +1,6 @@
+interface:
+  display_name: "Propose GRPO RFT Reward"
+  short_description: "Build one provider-neutral GRPO reward"
+  default_prompt: "Use $ade-build-reward-design-artifact to edit the declared reference into one bounded GRPO reward with a provider-neutral process rubric and deterministic fallback."
+policy:
+  allow_implicit_invocation: false

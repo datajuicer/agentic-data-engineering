@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze Long-CoT SFT Trial"
+  short_description: "Analyze one Long-CoT SFT selection trial"
+  default_prompt: "Use $ade-analyze-data-selection-trial to analyze the supplied Long-CoT SFT Experiment Package."
+policy:
+  allow_implicit_invocation: false

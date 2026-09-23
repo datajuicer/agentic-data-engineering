@@ -1,0 +1,18 @@
+schema_version: 1
+name: canonical-pre-gpu
+analysis:
+  profile_id: smoke.v1
+  review_required: true
+  evidence_view: canonical
+  default_on_exhaustion: true
+  provider:
+    type: local_analyzer
+    temperature: 0.0
+    enable_thinking: false
+    thinking_budget: 2048
+    max_completion_tokens: 4096
+    max_concurrent_requests: 128
+    request_timeout_seconds: 300
+    batch_timeout_seconds: null
+    max_attempts: 3
+    retry_delay_seconds: 0.5

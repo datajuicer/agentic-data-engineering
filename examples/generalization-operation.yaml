@@ -1,0 +1,143 @@
+# Copy to runs/operation-prompts/ and fill local paths and accepted checkpoint references.
+# Keep only the task suites and checkpoint variants you intend to evaluate.
+schema_version: 1
+kind: ade.generalization_operation
+evaluation_id: held-out-evaluation
+run_mode: AUTO
+execution_environment: <ABSOLUTE_REPOSITORY_PATH>/.unified-vllm-0.19.1-verl-venv
+deployment: configs/deployments/local.yaml
+expected_master_ip: <RAY_HEAD_IP>
+resource_authorization: NOT_AUTHORIZED
+contract_catalog: configs/evaluations/generalization-contracts.yaml
+full_matrix_after_admission: true
+execution:
+  poll_interval_seconds: 60
+  snapshot_interval_seconds: 600
+  max_attempts: 2
+  max_worker_restarts: 1
+  max_in_flight: 1
+suites:
+- contract_profile: sft_math_formal_v1
+  checkpoints:
+  - id: base
+    variant: base
+    subject_ref: <SFT-MATH_BASE_SUBJECT_REF>
+    path: models/Qwen2.5-7B-Instruct
+    protocol_role: base
+  - id: baseline
+    variant: baseline
+    subject_ref: <SFT-MATH_BASELINE_SUBJECT_REF>
+    path: <SFT-MATH_BASELINE_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n1
+    variant: n1
+    subject_ref: <SFT-MATH_N1_SUBJECT_REF>
+    path: <SFT-MATH_N1_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n3
+    variant: n3
+    subject_ref: <SFT-MATH_N3_SUBJECT_REF>
+    path: <SFT-MATH_N3_CHECKPOINT_PATH>
+    protocol_role: trained
+  datasets:
+  - id: math_val
+    samples_per_input: 3
+  - id: math_500
+    samples_per_input: 3
+  - id: aime25
+    samples_per_input: 32
+  - id: hmmt
+    samples_per_input: 32
+- contract_profile: sft_code_formal_v1
+  checkpoints:
+  - id: base
+    variant: base
+    subject_ref: <SFT-CODE_BASE_SUBJECT_REF>
+    path: models/Qwen2.5-7B-Instruct
+    protocol_role: base
+  - id: baseline
+    variant: baseline
+    subject_ref: <SFT-CODE_BASELINE_SUBJECT_REF>
+    path: <SFT-CODE_BASELINE_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n1
+    variant: n1
+    subject_ref: <SFT-CODE_N1_SUBJECT_REF>
+    path: <SFT-CODE_N1_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n3
+    variant: n3
+    subject_ref: <SFT-CODE_N3_SUBJECT_REF>
+    path: <SFT-CODE_N3_CHECKPOINT_PATH>
+    protocol_role: trained
+  datasets:
+  - id: livecodebench_gt_2024_03_30
+    samples_per_input: 3
+  - id: humaneval_plus
+    samples_per_input: 3
+  - id: codeforces
+    samples_per_input: 3
+  - id: codeelo
+    samples_per_input: 3
+- contract_profile: rft_math_formal_v1
+  checkpoints:
+  - id: base
+    variant: base
+    subject_ref: <RFT-MATH_BASE_SUBJECT_REF>
+    path: models/Qwen2.5-0.5B
+    protocol_role: base
+  - id: baseline
+    variant: baseline
+    subject_ref: <RFT-MATH_BASELINE_SUBJECT_REF>
+    path: <RFT-MATH_BASELINE_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n1
+    variant: n1
+    subject_ref: <RFT-MATH_N1_SUBJECT_REF>
+    path: <RFT-MATH_N1_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n3
+    variant: n3
+    subject_ref: <RFT-MATH_N3_SUBJECT_REF>
+    path: <RFT-MATH_N3_CHECKPOINT_PATH>
+    protocol_role: trained
+  datasets:
+  - id: math_500
+    samples_per_input: 3
+  - id: aime24
+    samples_per_input: 32
+  - id: aime25
+    samples_per_input: 32
+  - id: hmmt
+    samples_per_input: 32
+- contract_profile: rft_curriculum_formal_v1
+  checkpoints:
+  - id: base
+    variant: base
+    subject_ref: <RFT-CURRICULUM_BASE_SUBJECT_REF>
+    path: models/Qwen2.5-0.5B
+    protocol_role: base
+  - id: baseline
+    variant: baseline
+    subject_ref: <RFT-CURRICULUM_BASELINE_SUBJECT_REF>
+    path: <RFT-CURRICULUM_BASELINE_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n1
+    variant: n1
+    subject_ref: <RFT-CURRICULUM_N1_SUBJECT_REF>
+    path: <RFT-CURRICULUM_N1_CHECKPOINT_PATH>
+    protocol_role: trained
+  - id: n3
+    variant: n3
+    subject_ref: <RFT-CURRICULUM_N3_SUBJECT_REF>
+    path: <RFT-CURRICULUM_N3_CHECKPOINT_PATH>
+    protocol_role: trained
+  datasets:
+  - id: math_500
+    samples_per_input: 3
+  - id: aime24
+    samples_per_input: 32
+  - id: aime25
+    samples_per_input: 32
+  - id: hmmt
+    samples_per_input: 32

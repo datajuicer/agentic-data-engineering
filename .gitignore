@@ -1,0 +1,113 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+*~
+.idea/
+.vscode/
+
+# Python caches, test caches, and build output
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.python/
+.venv/
+venv/
+env/
+*.venv/
+.unified-vllm-*-venv/
+.unified-vllm-*-smoke-venv/
+.unified-vllm-train-venv/
+third_party/llamafactory/.unified-vllm-train-venv/
+clac_baseline/.vllm-venv/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+configs/deployments/local.yaml
+
+# Local runtime state
+runs/
+!analysis/runs/
+analysis/runs/*
+!analysis/runs/README.md
+!analysis/runs/runs.yaml
+!analysis/runs/ablation.json
+runs_smoke/
+workspace/
+workspace_smoke/
+status.json
+.ray_tmp/
+/logs/
+
+# Logs and generated reports
+*.log
+*.log.*
+*.jsonl
+
+# Local Codex/agent session metadata
+.agents/*
+!.agents/skills/
+!.agents/skills/**
+.codex/*
+
+# Model downloads, datasets, and generated ML artifacts
+Qwen/
+models/
+open-thoughts/
+data/
+reference/
+ckpts/
+clac_baseline/checkpoints/
+clac_baseline/task_runs/
+clac_baseline/outputs/
+clac_baseline/runs/
+third_party/llamafactory/data/
+third_party/llamafactory/tests/data/
+
+# Keep the LlamaFactory data source package visible despite generic data ignores.
+!third_party/llamafactory/src/llamafactory/data/
+!third_party/llamafactory/src/llamafactory/data/**
+
+# Keep the complete vendored VERL source visible despite generic metadata and data ignores.
+!third_party/verl/.codex/
+!third_party/verl/.codex/**
+!third_party/verl/.vscode/
+!third_party/verl/.vscode/**
+!third_party/verl/docs/data/
+!third_party/verl/docs/data/**
+!third_party/verl/verl/trainer/config/data/
+!third_party/verl/verl/trainer/config/data/**
+
+# Experiment tracking and checkpoints
+wandb/
+mlruns/
+
+# Large local datasets and archives
+*.arrow
+*.parquet
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+
+# Model weights and checkpoint shards
+*.ckpt
+*.safetensors
+*.pt
+*.pth
+*.bin
+
+# Local ADE test suite
+/ade/tests/

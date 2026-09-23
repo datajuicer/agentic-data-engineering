@@ -1,0 +1,30 @@
+schema_version: 1
+name: canonical-16gpu-coordinator
+runtime:
+  engine_transport: filesystem_queue
+  cluster:
+    total_gpus: 56
+    topology_source: ray_preflight
+    exclusive_ade_run: true
+  coordinator_capacity_gpus: 16
+  monitoring:
+    gpu_sample_interval_seconds: 30
+  allocations:
+    training: {gpus: 8}
+    online_validation: {gpus: 8}
+    offline_validation: {gpus: 16}
+    operator_evaluation: {gpus: 16}
+  concurrency:
+    training_with_online_validation: true
+    offline_with_operator_evaluation: false
+  backends:
+    sft:
+      name: llamafactory
+      environment: .unified-vllm-0.19.1-verl-venv
+      source: third_party/llamafactory
+    rft:
+      name: verl
+      environment: .unified-vllm-0.19.1-verl-venv
+      source: third_party/verl
+      tensor_model_parallel_size: 1
+      training_gpus_per_node: 8

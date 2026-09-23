@@ -1,0 +1,47 @@
+schema_version: 1
+experiment: openthoughts-math-sft-data-selection-baseline-formal
+seed: 42
+judge_enrichment:
+  enabled: true
+task:
+  type: data_selection
+  spec: tasks/formal-long-cot-data-selection.yaml
+train: train/sft-general-micro.yaml
+eval: eval/sft-formal-validation.yaml
+analysis: analysis/canonical-formal.yaml
+runtime: runtime/canonical-24gpu-coordinator.yaml
+agent:
+  backend: codex
+  model: gpt-5.6-sol
+  reasoning_effort: xhigh
+  sandbox_mode: danger-full-access
+  approval_policy: never
+  max_retries: 3
+  heartbeat_timeout_seconds: 900
+artifact_builder:
+  max_reflections: 2
+search:
+  coordinator_count: 1
+  plans_per_coordinator: 5
+  trials_per_plan: 1
+engine:
+  command_transport: filesystem_queue
+  claim_timeout_seconds: 1800
+  heartbeat_timeout_seconds: 1800
+  automatic_recovery:
+    max_attempts: 3
+    dependency_readiness_timeout_seconds: 1800
+operator_evaluation:
+  enabled: true
+tracking:
+  provider: wandb
+  enabled: true
+  mode: online
+  entity_env: WANDB_ENTITY
+  base_url_env: WANDB_BASE_URL
+  api_key_env: WANDB_API_KEY
+bootstrap:
+  enabled: true
+  reference:
+    enabled: false
+  stop_after_baseline: true

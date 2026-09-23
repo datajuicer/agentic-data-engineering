@@ -1,0 +1,6 @@
+# Existing production Judge dependencies, isolated from the training stack.
+# Install with --no-deps --target <environment>/judge-packages.
+# Shared dependencies come from unified-vllm-0.19.1-verl-venv.txt.
+fastapi==0.115.0
+starlette==0.38.6
+transformers==4.57.1

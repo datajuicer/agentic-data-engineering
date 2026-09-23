@@ -1,0 +1,6 @@
+interface:
+  display_name: "Coordinate Long-CoT SFT Selection"
+  short_description: "Plan one Long-CoT SFT selection experiment"
+  default_prompt: "Use $ade-coordinate-data-selection to propose one Long-CoT SFT selection plan from the provided run package."
+policy:
+  allow_implicit_invocation: false

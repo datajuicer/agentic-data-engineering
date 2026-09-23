@@ -1,0 +1,39 @@
+[project]
+name = "agentic-data-engineering"
+version = "0.1.0"
+description = "Agentic Data Engineering: durable agent-driven training and evaluation."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "Jinja2==3.1.6",
+    "jsonschema==4.26.0",
+    "PyYAML==6.0.3",
+]
+
+# Training/evaluation dependencies are frozen in requirements/ and installed
+# by scripts/recreate_unified_vllm_env.sh, including both local backends.
+
+[project.scripts]
+ade = "ade.harness.cli:main"
+ade-judge-vllm = "ade.local_rubric_judge.vllm_cli:main"
+
+[build-system]
+requires = ["setuptools==80.10.2", "wheel==0.47.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["ade*"]
+exclude = ["ade.tests", "ade.tests.*"]
+
+# The pinned installer owns the single environment, including pytest and demo
+# dependencies. Disable uv project management to avoid creating a second env.
+[tool.uv]
+managed = false
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: fast tests for pure functions, validation rules, prompt builders, and local helpers",
+    "integration: tests that cross ADE runner, queue, workflow, engine-client, or CLI boundaries",
+    "slow: tests that are intentionally broader or slower than the normal fast unit subset",
+    "gpu: tests that require real GPU/Ray/vLLM/LlamaFactory execution",
+]

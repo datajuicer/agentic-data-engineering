@@ -1,0 +1,77 @@
+schema_version: 1
+name: rft-grpo-math-math-standard-100-step
+train:
+  output_model_protocol:
+    thinking:
+      mode: disabled
+      reasoning_parser: none
+  rft:
+    profile: simplelr_math_grpo_standard_100_step.v1
+    backend: verl
+    algorithm: grpo
+    gamma: 1.0
+    lambda: 1.0
+    rollout_backend: vllm
+    reward_entrypoint: compute_score
+    group_credit:
+      enabled: true
+      entrypoint: assign_group_credit
+      schema_version: ade.group_credit.v1
+    semantic_evidence_interval: 20
+    require_tokenizer_artifacts: true
+    # VERL 0.19.1 executes the update at total_training_steps before returning.
+    # This isolated profile extends the formal baseline to 100 real actor updates.
+    total_training_steps: 100
+    total_epochs: 20
+    train_batch_size: 256
+    gen_batch_size: 256
+    data_shuffle: true
+    rollout_n: 8
+    ppo_mini_batch_size: 256
+    ppo_micro_batch_size_per_gpu: 8
+    log_prob_micro_batch_size_per_gpu: 16
+    max_prompt_length: 1024
+    max_response_length: 8192
+    truncation: left
+    learning_rate: 5.0e-7
+    lr_scheduler_type: constant
+    lr_warmup_steps_ratio: 0.0
+    weight_decay: 0.01
+    ppo_epochs: 1
+    actor_shuffle: false
+    actor_use_dynamic_bsz: false
+    actor_max_token_len_per_gpu: 16384
+    use_remove_padding: true
+    enable_gradient_checkpointing: true
+    ulysses_sequence_parallel_size: 1
+    actor_param_offload: false
+    actor_grad_offload: false
+    actor_optimizer_offload: false
+    reference_param_offload: true
+    log_prob_max_token_len_per_gpu: 16384
+    clip_ratio: 0.2
+    clip_ratio_low: 0.2
+    clip_ratio_high: 0.2
+    entropy_coeff: 0.001
+    grad_clip: 1.0
+    use_kl_loss: true
+    kl_loss_coef: 0.0001
+    kl_loss_type: low_var_kl
+    kl_controller: fixed
+    use_kl_in_reward: false
+    kl_coef: 0.001
+    temperature: 1.0
+    top_p: 1.0
+    top_k: -1
+    gpu_memory_utilization: 0.75
+    rollout_dtype: bfloat16
+    ignore_eos: false
+    max_num_batched_tokens: 10216
+    max_num_seqs: 1024
+    enable_chunked_prefill: false
+    enforce_eager: true
+    free_cache_engine: true
+    artifact_interval: 4
+    checkpoint_retention_top_k: -1
+    test_freq: -1
+    resume_mode: disable

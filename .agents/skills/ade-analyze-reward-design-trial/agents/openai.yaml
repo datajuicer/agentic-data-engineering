@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze GRPO RFT Reward Trial"
+  short_description: "Analyze one packaged GRPO RFT reward trial"
+  default_prompt: "Use $ade-analyze-reward-design-trial to analyze the supplied GRPO RFT Experiment Package."
+policy:
+  allow_implicit_invocation: false

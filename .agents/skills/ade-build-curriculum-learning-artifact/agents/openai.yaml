@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ade Build Curriculum Learning Artifact"
+  short_description: "Help with Ade Build Curriculum Learning Artifact tasks"
+  default_prompt: "Use $ade-build-curriculum-learning-artifact to build the accepted Curriculum Learning schedule artifact."
+policy:
+  allow_implicit_invocation: false

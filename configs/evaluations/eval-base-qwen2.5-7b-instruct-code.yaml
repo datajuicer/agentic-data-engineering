@@ -1,0 +1,28 @@
+schema_version: 2
+evaluation_id: eval-base-qwen2.5-7b-instruct-code
+seed: 42
+evaluation_role: benchmark_test
+runtime: runtime/canonical-24gpu-coordinator.yaml
+suites:
+  - id: code
+    task_type: data_selection
+    task: tasks/formal-long-cot-data-selection-code.yaml
+    eval: eval/sft-formal-validation.yaml
+    prompt_contract:
+      system_prompt: {id: sft_general.v1, digest: 7cbf9a28af56f040e15c42666f3f6a1509eb034572b993d4f4d96b8cc59da340}
+      chat_template: {id: native_chat_template.v1, digest: cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f}
+    metrics: {primary: pass_at_k, secondary: avg_at_k}
+    checkpoints:
+      - id: base
+        subject_ref: eval-base-qwen2.5-7b-instruct-code/base
+        path: models/Qwen2.5-7B-Instruct
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+    datasets:
+      - {id: livecodebench_le_2024_03_30, samples_per_input: 3, family: code}
+      - {id: livecodebench_gt_2024_03_30, samples_per_input: 3, family: code}
+      - {id: humaneval_plus, samples_per_input: 3, family: code}
+      - {id: mbpp_plus, samples_per_input: 3, family: code}
+      - {id: codeelo, samples_per_input: 3, family: code}
+      - {id: codeforces, samples_per_input: 3, family: code}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Propose Long-CoT SFT Selection"
+  short_description: "Build one Long-CoT selection experiment"
+  default_prompt: "Use $ade-build-data-selection-artifact to build one Long-CoT SFT selection.py experiment and its design.md."
+policy:
+  allow_implicit_invocation: false

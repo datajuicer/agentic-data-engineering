@@ -1,0 +1,23 @@
+schema_version: 1
+name: canonical-reward-design-rft-formal
+task_name: math-math-reward-design
+objective: Compile a math reward function and execute the formal VERL GRPO experiment.
+base_model: models/Qwen2.5-0.5B
+base_model_protocol:
+  thinking:
+    mode: disabled
+    reasoning_parser: none
+prompt_protocol:
+  mode: chat_template
+  system_prompt: rft_qwen_default.v1
+data:
+  name: math
+  train: data/rft/math/math_train3072_val500_seed42/train.parquet
+  validation: [math_val]
+  test: [math_500]
+rft:
+  reward_range: [0.0, 1.0]
+  training_outcome_adapter:
+    adapter_id: math_hf_math_verify.v1
+    data_sources: [math]
+    extraction_protocol: math_qwen_boxed.v1

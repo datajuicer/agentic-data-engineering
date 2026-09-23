@@ -1,0 +1,127 @@
+schema_version: 1
+name: generalization-contracts
+runtime: runtime/canonical-8gpu-coordinator.yaml
+profiles:
+  sft_math_formal_v1:
+    suite_id: sft-math
+    task_type: data_selection
+    task: tasks/formal-long-cot-data-selection.yaml
+    eval: eval/sft-formal-validation.yaml
+    prompt_contract:
+      system_prompt:
+        id: sft_general.v1
+        digest: 7cbf9a28af56f040e15c42666f3f6a1509eb034572b993d4f4d96b8cc59da340
+      chat_template:
+        id: native_chat_template.v1
+        digest: cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f
+    metrics: {primary: pass_at_k, secondary: avg_at_k}
+    protocol_roles:
+      base:
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      trained:
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+    dataset_families:
+      math_val: math
+      math_500: math
+      aime25: contest
+      hmmt: contest
+
+  sft_code_formal_v1:
+    suite_id: sft-code
+    task_type: data_selection
+    task: tasks/formal-long-cot-data-selection-code.yaml
+    eval: eval/sft-formal-validation.yaml
+    prompt_contract:
+      system_prompt:
+        id: sft_general.v1
+        digest: 7cbf9a28af56f040e15c42666f3f6a1509eb034572b993d4f4d96b8cc59da340
+      chat_template:
+        id: native_chat_template.v1
+        digest: cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f
+    metrics: {primary: pass_at_k, secondary: avg_at_k}
+    protocol_roles:
+      base:
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      trained:
+        model_protocol:
+          thinking:
+            mode: tagged
+            activation: learned
+            open_tag: <think>
+            close_tag: </think>
+            tag_encoding: special_tokens
+            reasoning_parser: qwen3
+        thinking_budget: 8192
+    dataset_families:
+      livecodebench_gt_2024_03_30: code
+      humaneval_plus: code
+      codeelo: code
+      codeforces: code
+
+  rft_math_formal_v1:
+    suite_id: rft-math
+    task_type: reward_design
+    task: tasks/formal-math-reward-design.yaml
+    eval: eval/rft-formal-validation.yaml
+    prompt_contract:
+      system_prompt:
+        id: rft_qwen_default.v1
+        digest: 66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e
+      chat_template:
+        id: native_chat_template.v1
+        digest: 44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5
+    metrics: {primary: avg_at_k, secondary: pass_at_k}
+    protocol_roles:
+      base:
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      trained:
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+    dataset_families:
+      math_500: math
+      aime24: contest
+      aime25: contest
+      hmmt: contest
+
+  rft_curriculum_formal_v1:
+    suite_id: rft-curriculum
+    task_type: curriculum_learning
+    task: tasks/formal-math-curriculum-learning.yaml
+    eval: eval/rft-formal-validation.yaml
+    prompt_contract:
+      system_prompt:
+        id: rft_qwen_default.v1
+        digest: 66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e
+      chat_template:
+        id: native_chat_template.v1
+        digest: 44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5
+    metrics: {primary: avg_at_k, secondary: pass_at_k}
+    protocol_roles:
+      base:
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+      trained:
+        model_protocol:
+          thinking: {mode: disabled, reasoning_parser: none}
+        thinking_budget: -1
+    dataset_families:
+      math_500: math
+      aime24: contest
+      aime25: contest
+      hmmt: contest

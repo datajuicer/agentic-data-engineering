@@ -1,0 +1,21 @@
+schema_version: 1
+name: sft-formal-validation
+eval:
+  enabled: true
+  purposes:
+    online:
+      samples_per_input: 8
+      decoding: {mode: sampling, temperature: 0.6, top_p: 0.95}
+      ranking: {primary: macro_pass_at_configured_k, secondary: macro_avg_at_configured_k, weights: {aime24: 1.0}}
+    offline:
+      samples_per_input: 32
+      decoding: {mode: sampling, temperature: 0.6, top_p: 0.95}
+      ranking: {primary: macro_pass_at_configured_k, secondary: macro_avg_at_configured_k, weights: {aime24: 1.0}}
+    operator:
+      samples_per_input: 32
+      decoding: {mode: sampling, temperature: 0.6, top_p: 0.95}
+  max_model_len: 32768
+  max_new_tokens: 16384
+  thinking_budget: 8192
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 64

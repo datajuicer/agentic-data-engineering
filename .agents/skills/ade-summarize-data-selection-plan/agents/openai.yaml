@@ -1,0 +1,6 @@
+interface:
+  display_name: "Summarize Long-CoT SFT Plan"
+  short_description: "Summarize one Long-CoT SFT selection plan"
+  default_prompt: "Use $ade-summarize-data-selection-plan to summarize the supplied Long-CoT SFT plan view."
+policy:
+  allow_implicit_invocation: false

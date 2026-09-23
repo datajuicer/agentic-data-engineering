@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ade Summarize Curriculum Learning Run"
+  short_description: "Help with Ade Summarize Curriculum Learning Run tasks"
+  default_prompt: "Use $ade-summarize-curriculum-learning-run to merge the queue-head Curriculum Learning Plan memory into Run memory."
+policy:
+  allow_implicit_invocation: false

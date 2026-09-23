@@ -1,0 +1,4 @@
+interface:
+  display_name: "ADE Supervise Generalization"
+  short_description: "Launch and supervise one standalone generalization matrix"
+  default_prompt: "Use $ade-supervise-generalization to launch and supervise the standalone evaluation selected by this Operation Prompt through aggregation."

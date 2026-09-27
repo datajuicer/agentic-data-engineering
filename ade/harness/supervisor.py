@@ -673,6 +673,8 @@ class RunSupervisor:
                         run_id,
                         "--project-root",
                         str(self.project_root),
+                        "--runs-root",
+                        str(self.runs_root),
                         "--queue-root",
                         str(self.queue_root.parent / "review"),
                         "--work-root",

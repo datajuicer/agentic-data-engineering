@@ -5,7 +5,7 @@
 **ADE — agents that develop data selection, reward and curriculum strategies through controlled experiments.**
 
 <!-- [Live Demo](https://ade-code-research.ruomengd.chatgpt.site) -->
-[Quickstart](docs/en/quickstart.md) · [Walkthrough](docs/en/walkthrough.md) · [Documentation](docs/en/README.md)
+[🚀 Quickstart](docs/en/quickstart.md) · [🧭 Walkthrough](docs/en/walkthrough.md) · [📚 Documentation](docs/en/README.md)
 
 </div>
 
@@ -96,7 +96,7 @@ See [AGENTS.md](AGENTS.md) for contributor-Agent instructions.
 ## License
 
 [LICENSE](LICENSE) is a placeholder pending the project license and copyright details.
-Third-party components retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Third-party components retain their respective license files.
 
 ## Citation
 

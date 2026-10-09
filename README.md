@@ -1,6 +1,6 @@
 <div align="center">
 
-# ADE: Agentic Data Engineering
+# Agentic Data Engineering for LLMs: System Design and a Controlled Empirical Study
 
 **ADE — agents that develop data selection, reward and curriculum strategies through controlled experiments.**
 
@@ -16,7 +16,7 @@ and evaluation. Strategy selection uses in-loop results; held-out evaluation sta
 the research feedback loop.
 
 **Start here:** [Install](docs/en/installation.md) → [Prepare inputs](docs/en/data-preparation.md) →
-[Configure deployment](docs/en/deployment.md) → [Give an Operation Prompt to the supervising Agent](docs/en/quickstart.md).
+[Configure deployment](docs/en/deployment.md) → [Give an Operation Prompt to the operator agent](docs/en/quickstart.md).
 
 <!--
 **[Explore the interactive demo](https://ade-code-research.ruomengd.chatgpt.site)** — Follow a code data-selection run through strategy development, shared findings and recorded training curves.
@@ -27,7 +27,7 @@ the research feedback loop.
 [![ADE pipeline: Harness-governed experiments, research Agents and Memory, with external operations and held-out evaluation](docs/assets/ade-pipeline.png)](docs/assets/ade-pipeline.pdf)
 
 Agents develop strategies from Experiment Packages and Memory; the Engine executes controlled experiments.
-An external supervising Agent handles operation, monitoring and recovery using a repository Skill.
+An external operator agent handles operation, monitoring and recovery using a repository Skill.
 
 A Run first evaluates the base model and trains a baseline. ADE then proposes a Plan,
 implements its strategy, trains and evaluates a Trial, and records the analysis in Memory.
@@ -37,13 +37,13 @@ and evaluation rules stay fixed within a Run.
 ## Quickstart
 
 Every real Run starts with **an Operation Prompt + an exact config**, handed to one
-supervising Agent. [`ade-supervise-run`](.agents/skills/ade-supervise-run/SKILL.md)
+operator agent. [`ade-supervise-run`](.agents/skills/ade-supervise-run/SKILL.md)
 owns admission, startup, monitoring, operational recovery and terminal acceptance.
 ADE launches its research-role workers internally.
 
 1. Install the complete runtime with `bash scripts/recreate_unified_vllm_env.sh` after reading the [prerequisites](docs/en/installation.md).
 2. Prepare models/data, the local deployment and assigned Ray nodes using the [walkthrough](docs/en/walkthrough.md).
-3. Fill [baseline-operation.md](examples/math-sft/baseline-operation.md) with your checkout, environment, deployment and resource authorization; give it to the supervising Agent.
+3. Fill [baseline-operation.md](examples/math-sft/baseline-operation.md) with your checkout, environment, deployment and resource authorization; give it to the operator agent.
 4. After baseline acceptance, fill [ade-operation.md](examples/math-sft/ade-operation.md) with its actual Run ID and hand off the separate N=1 ADE.
 
 ```text
@@ -72,7 +72,7 @@ Read [results](docs/en/results.md) for Trial Records, rankings and Memory. See [
 
 | Guide | Documentation |
 | --- | --- |
-| Start with a supervising Agent | [Quickstart](docs/en/quickstart.md) |
+| Start with an operator agent | [Quickstart](docs/en/quickstart.md) |
 | Operation Prompt → baseline → ADE → results | [Walkthrough](docs/en/walkthrough.md) |
 | Runtime and dependencies | [Installation](docs/en/installation.md) |
 | Models and datasets | [Inputs](docs/en/data-preparation.md) |
@@ -95,7 +95,7 @@ See [AGENTS.md](AGENTS.md) for contributor-Agent instructions.
 
 ## License
 
-[LICENSE](LICENSE) is a placeholder pending the project license and copyright details.
+ADE is licensed under the [MIT License](LICENSE).
 Third-party components retain their respective license files.
 
 ## Citation

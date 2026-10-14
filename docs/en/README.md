@@ -21,5 +21,5 @@ The [example prompts](../../examples/README.md) provide Baseline and ADE entries
 - [Configuration matrix](../../configs/README.md) for supported task families and baseline dependencies.
 - [FAQ](faq.md).
 
-The [license](../../LICENSE) and [citation](../../CITATION.bib)
-currently have explicit placeholders.
+ADE is released under the [MIT License](../../LICENSE).
+See [CITATION.bib](../../CITATION.bib) for the paper's BibTeX entry.

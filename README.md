@@ -5,7 +5,7 @@
 **ADE — agents that develop data selection, reward and curriculum strategies through controlled experiments.**
 
 <!-- [Live Demo](https://ade-code-research.ruomengd.chatgpt.site) -->
-[🚀 Quickstart](docs/en/quickstart.md) · [🧭 Walkthrough](docs/en/walkthrough.md) · [📚 Documentation](docs/en/README.md)
+[🚀 Quickstart](docs/en/quickstart.md) · [🧭 Walkthrough](docs/en/walkthrough.md) · [📚 Documentation](docs/en/README.md) · [📄 Paper](https://arxiv.org/pdf/2610.14238)
 
 </div>
 
@@ -100,5 +100,16 @@ Third-party components retain their respective license files.
 
 ## Citation
 
-Citation metadata is pending. [CITATION.bib](CITATION.bib) reserves the paper title;
-replace the placeholder with the final authors, publication details and public URL before citing.
+```bibtex
+@misc{ding2026agenticdataengineeringllms,
+  title={Agentic Data Engineering for LLMs: System Design and a Controlled Empirical Study},
+  author={Ruomeng Ding and Qianli Shen and Zhaoyang Han and Meixin Chen and Daoyuan Chen and Yaliang Li},
+  year={2026},
+  eprint={2610.14238},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2610.14238},
+}
+```
+
+The same entry is available in [CITATION.bib](CITATION.bib).

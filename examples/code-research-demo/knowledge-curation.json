@@ -1,0 +1,90 @@
+{
+  "math": [
+    {
+      "id": "K1", "sources": ["C1/P1"], "target": "C1/P2",
+      "title": "A passing Judge score did not guarantee clean supervision",
+      "description": "Independent Review found 45 core defects among 270 reviewed selections from C1/P1, despite all 384 passing the selection Judge. C1/P2 added a fresh blind verification pass while holding the mixture and length controls fixed.",
+      "quote": "Independent selected-example Review nevertheless found that 45 of 270 usable normalized rows failed at least one core axis"
+    },
+    {
+      "id": "K2", "sources": ["C3/P1"], "target": "C3/P2",
+      "title": "Saturated scores motivated a more discriminating selector",
+      "description": "C3/P1 assigned the maximum score to 2,888 candidates, yet reviewed selections still contained errors and repetitive reasoning. C3/P2 replaced that coarse score with task-aware validity checks and a ranking of useful progress.",
+      "quote": "It assigned the maximum projected score to 2,888 candidates"
+    },
+    {
+      "id": "K3", "sources": ["C3/P2", "C3/P3"], "target": "C1/P4",
+      "title": "Inspect repetition directly",
+      "description": "Review linked repetition to major errors in C3/P2. C3/P3 still contained repeated paragraphs after two semantic checks. C1/P4 therefore tested a deterministic repeated-span filter while retaining the leader’s length bands.",
+      "quote": "direct deterministic inspection of stored response text can expose repetition that saturated semantic labels miss"
+    },
+    {
+      "id": "K4", "sources": ["C3/P2", "C3/P3"], "target": "C3/P4",
+      "title": "Separate evidence coverage from shorter training targets",
+      "description": "C3/P2 lacked matched Judge evidence for 23 selected pairs. C3/P3 showed that exact-pair binding was feasible, but also shortened the training targets. C3/P4 isolated exact-pair assessment while restoring the leader’s length and exposure controls.",
+      "quote": "only 361 of its 384 stored question/response pairs have matched completed task-aware assessment evidence"
+    },
+    {
+      "id": "K5", "sources": ["C3/P2", "C3/P4"], "target": "C3/P5",
+      "title": "Repair the known gaps instead of selecting everything again",
+      "description": "C3/P4 repaired evidence coverage but lost five solved problems relative to C3/P2. C3/P5 proposed retaining the 361 already assessed leader selections and replacing only the 23 unmatched pairs.",
+      "quote": "Neither tests retaining the 361 already supported leader members and changing only the known evidence failures"
+    },
+    {
+      "id": "K6", "sources": ["C1/P2", "C3/P3"], "target": "C1/P5",
+      "title": "Change how verification obtains its reference",
+      "description": "Both earlier verification attempts still admitted flawed responses and reduced validation scores. C1/P5 proposed creating a reference without seeing the candidate answer, rather than repeating the same answer-conditioned verification.",
+      "quote": "They do not test a reference created without exposure to the candidate answer"
+    }
+  ],
+  "reward": [
+    {
+      "id": "K1", "sources": ["C1/P1"], "target": "C1/P2",
+      "title": "Relative quality can still reward an unsound answer",
+      "description": "C1/P1 made group rewards more varied, but 16.80% of training rows were verifier-wrong and received positive advantage. C1/P2 added an absolute quality requirement before rewarding failed responses.",
+      "quote": "Population evidence shows that 16.80% of all rows were verifier-wrong but received positive realized advantage"
+    },
+    {
+      "id": "K2", "sources": ["C1/P2"], "target": "C1/P3",
+      "title": "Require support from other responses in the group",
+      "description": "C1/P2’s promoted responses were much less reliable when supporting process evidence was sparse. C1/P3 made credit for an all-wrong group depend on corroboration from multiple sibling responses.",
+      "quote": "134 of 193 promoted rows were incorrect when support was sparse, versus 22 of 129 when support was broad"
+    },
+    {
+      "id": "K3", "sources": ["C1/P3"], "target": "C1/P4",
+      "title": "A hard support threshold discards useful boundary cases",
+      "description": "Review found useful mathematical work just below C1/P3’s corroboration threshold, where every response received zero credit. C1/P4 tested relative process credit near that boundary.",
+      "quote": "a hard sibling-corroboration cliff discards task-aligned relative evidence immediately below its eligibility boundary"
+    },
+    {
+      "id": "K4", "sources": ["C1/P4"], "target": "C1/P5",
+      "title": "Withdraw credit from weakly supported groups",
+      "description": "The relaxed branch in C1/P4 gave positive advantage to 201 verifier-wrong responses in the reviewed sample; 140 were substantively wrong. C1/P5 restricted positive credit to strongly corroborated groups.",
+      "quote": "Of 201 outcome-failed responses that received positive actual advantage there, 140 were substantively wrong"
+    },
+    {
+      "id": "K5", "sources": ["C3/P1"], "target": "C3/P2",
+      "title": "Relevance is weaker evidence than a sound derivation",
+      "description": "C3/P1’s progress ranking often agreed with Review, but 239 of 678 reviewed wrong responses with positive advantage made no mathematical progress. C3/P2 prioritized derivational and conclusion support over relevance.",
+      "quote": "239 (`35.3%`) were independently judged to show no mathematical progress"
+    },
+    {
+      "id": "K6", "sources": ["C3/P2", "C2/P1"], "target": "C3/P3",
+      "title": "Use successful siblings to anchor process credit",
+      "description": "C3/P2 still promoted unsupported responses in all-wrong groups. C2/P1 supplied a contrasting example with no positive advantage for outcome-failed rows. C3/P3 combined progress discrimination with an outcome-success anchor.",
+      "quote": "it recorded no positive advantage for any outcome-failed row"
+    },
+    {
+      "id": "K7", "sources": ["C3/P3", "C2/P2"], "target": "C3/P4",
+      "title": "Check whether a successful answer is a sound anchor",
+      "description": "C3/P3’s reviews exposed flawed reasoning in some outcome-correct answers. C2/P2 showed that process evidence could distinguish stronger and weaker successful responses. C3/P4 required process support before a successful sibling could anchor credit.",
+      "quote": "outcome success does not make all successful responses equally credible as reasoning anchors"
+    },
+    {
+      "id": "K8", "sources": ["C1/P3", "C3/P3"], "target": "C2/P5",
+      "title": "Keep useful process ordering without the unsafe all-wrong branch",
+      "description": "C1/P3 showed useful within-outcome ordering but also false positive winners in all-wrong groups. C3/P3 preserved negative advantage for every verifier-wrong row. C2/P5 proposed combining the safer mixed-group behavior with process ordering in all-successful groups.",
+      "quote": "The second source left all-successful groups at identity"
+    }
+  ]
+}

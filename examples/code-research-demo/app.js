@@ -10,20 +10,22 @@ const meta = {
   math: {name:'Math data selection',kind:'LONG-COT SFT · C = 3',title:'Validity-gated, progress-ranked selection',primary:'pass',k:32,onlineLabel:'Pass@8',heldout:'AIME25',model:'Qwen2.5-7B-Instruct',paper:39,
     description:'A coarse quality gate could not distinguish enough candidates. C3/P2 replaces it with task-aware validity checks and a ranking of directness, useful progress and low redundancy, while preserving length quotas and token exposure.',
     protocol:'384 of 3,840 OpenThoughts trajectories · Qwen2.5-7B-Instruct · AIME24 Pass@32, then Average@32 for ties.',
-    limit:'The selected Plan’s downstream hypothesis was supported, but Judge evidence covered only 361 of 384 selected pairs. Subsequent experiments changed multiple properties; they do not isolate the cause of the gain.',
-    insights:[['A sharper measurement','C3/P1’s coarse Judge assigned top scores broadly. C3/P2 introduced validity gates and a more discriminating progress ranking.','C3/P2'],['Stricter is not always better','Later repetition filters, shorter targets and exact-pair verification did not exceed the selected strategy.','C3/P4'],['Keep the evidence limits visible','C1/P5 had a score, but its proposed reference handoff was not realized. Its accepted hypothesis remained inconclusive.','C1/P5']]},
+    limit:'Judge evidence covered 361 of 384 selected pairs. Subsequent experiments changed multiple properties; they do not isolate the cause of the gain.',
+    insights:[['A sharper measurement','C3/P1’s coarse Judge assigned top scores broadly. C3/P2 introduced validity gates and a more discriminating progress ranking.','C3/P2'],['Stricter is not always better','Later repetition filters, shorter targets and exact-pair verification did not exceed the selected strategy.','C3/P4'],['Keep the evidence limits visible','C1/P5 had a score, but its proposed reference handoff was not realized. The result therefore does not test the intended reference-based change.','C1/P5']]},
   code: {name:'Code data selection',kind:'LONG-COT SFT · C = 3',title:'Stratified Repetition Control',primary:'pass',k:3,onlineLabel:'Pass@1',heldout:'Later LiveCodeBench split',model:'Qwen2.5-7B-Instruct',paper:9,
     description:'C1/P3 inherits a code-focused subset and replaces highly repetitive records with low-repetition candidates matched by prompt subtype, cutoff status, length band and nearest token count.',
     protocol:'384 of 3,840 OpenThoughts trajectories · Qwen2.5-7B-Instruct · LiveCodeBench Pass@3, then Average@3 for ties.',
-    limit:'The selected strategy has the best in-loop score, while its mechanism hypothesis remains inconclusive. Diagnostic knowledge links are distinct from inherited artifacts. Operator test is one held-out split, not the four-benchmark Macro Avg.',
+    limit:'Knowledge links show how recorded findings informed later decisions. Operator test is one held-out split, not the four-benchmark Macro Avg.',
     insights:[['Length is a control','Shortening C2/P1’s targets reduced both metrics. The selected strategy therefore matched length while testing repetition.','C2/P2'],['An observable selection signal','C1/P2’s Judge gate found no failing group. C1/P3 used a deterministic repetition measure to distinguish candidates.','C1/P3'],['Findings travel beyond parents','Image-marker findings from C1/P4 informed C1/P5, even though C1/P5 inherited the stronger C1/P3 strategy.','C1/P5']]},
   reward: {name:'Math reward design',kind:'REINFORCEMENT FINE-TUNING · C = 3',title:'Group-conditioned process credit',primary:'average',k:3,onlineLabel:'Average@1',heldout:'MATH-500',model:'Qwen2.5-0.5B',paper:44,
     description:'C1/P3 moves from relative process quality to absolute eligibility and then sibling corroboration. Credit depends on group correctness; in all-wrong groups, positive shaping requires corroborating process evidence.',
     protocol:'Qwen2.5-0.5B · 100 RFT steps · MATH-S Average@3, then Pass@3 for ties. One of the fifteen Plans failed before evaluation.',
-    limit:'C1/P3’s direct candidate/source replay fell back because its Judge was not configured, so the complete hypothesis remains inconclusive. C2/P5 has a score but no accepted agent-authored conclusion. The failed C2/P4 is not assigned a zero score.',
-    insights:[['From relative to corroborated credit','C1’s first two proposals regressed. Requiring sibling corroboration produced the selected 36.67% Average@3 strategy.','C1/P3'],['Useful parallel alternatives','C3 combined failed-progress discrimination with C2’s outcome anchoring. Its later refinements did not exceed C1/P3.','C3/P4'],['Failure is a distinct outcome','C2/P4’s negative-evidence veto failed during Builder validation. It has no evaluable score or rejected hypothesis.','C2/P4']]},
+    limit:'C2/P5 has a score but no accepted agent-authored conclusion. The failed C2/P4 is not assigned a zero score.',
+    insights:[['From relative to corroborated credit','C1’s first two proposals regressed. Requiring sibling corroboration produced the selected 36.67% Average@3 strategy.','C1/P3'],['Useful parallel alternatives','C3 combined failed-progress discrimination with C2’s outcome anchoring. Its later refinements did not exceed C1/P3.','C3/P4'],['Failure is a distinct outcome','C2/P4’s negative-evidence veto failed during Builder validation. It has no validation score.','C2/P4']]},
 };
 const cases = {math:window.ADE_ADDITIONAL_CASES.math,code:window.ADE_CASE,reward:window.ADE_ADDITIONAL_CASES.reward};
+for(const key of ['math','reward']) cases[key].knowledge=window.ADE_SOURCE_DATA[key].knowledge;
+cases.code.knowledge=cases.code.knowledge.map(k=>({...k,title:window.ADE_CODE_KNOWLEDGE[k.id][0],description:window.ADE_CODE_KNOWLEDGE[k.id][1]}));
 let slug = 'code', data = cases.code, info = meta.code, plans = new Map();
 const state = {selected:data.selected,view:'ancestry',curve:'loss',count:15,timer:null,followups:false};
 const title = id => slug === 'code' ? window.ADE_CODE_NARRATIVE[id][0] : plans.get(id).title;
@@ -40,7 +42,7 @@ function selectCase(id,writeUrl=false) {
   $('compare').checked=true;$('chart-tooltip').hidden=true;
   setPressed('[data-view]','ancestry');setPressed('[data-curve]','loss');
   const knowledgeButton=document.querySelector('[data-view="knowledge"]');knowledgeButton.disabled=!data.knowledge.length;
-  knowledgeButton.title=data.knowledge.length?'Curated diagnostic links':'Separate diagnostic links are curated only for the Code case; explicit Plan relations are shown here.';
+  knowledgeButton.title='Recorded findings that informed later strategy changes';
   document.querySelector('[data-curve="loss"]').textContent=slug==='reward'?'Actor loss':'Training loss';
   $('case-tabs').innerHTML=Object.entries(meta).map(([key,m],i)=>`<button class="case-tab ${key===slug?'active':''}" data-case="${key}" aria-pressed="${key===slug}"><span class="case-index">0${i+1}</span><strong>${m.name}</strong><small>${m.title}</small><span class="case-tab-bottom">15 Plans · C = 3 <span aria-hidden="true">↗</span></span></button>`).join('');
   const winner=plans.get(data.selected);
@@ -72,7 +74,7 @@ function renderBoard(){
   $('replay-status').textContent=state.followups?'Selected strategy and its direct follow-ups highlighted.':state.count===0?'Baseline established. Replay to reveal finished Plans.':state.count===data.plans.length?`All ${data.plans.length} Plans shown${slug==='reward'?' · 14 evaluated, 1 failed':''}.`:`${state.count} Plans finished · ${state.selected}: ${title(state.selected)}`;
   const knowledge=data.knowledge.filter(k=>(k.target===state.selected||k.sources.includes(state.selected))&&plans.get(k.target).completionOrder<=state.count);
   $('knowledge-notes').hidden=state.view!=='knowledge'||!knowledge.length;
-  $('knowledge-notes').innerHTML=knowledge.map(k=>`<p><strong>${k.id} · ${escape(window.ADE_CODE_KNOWLEDGE[k.id][0])}</strong> ${escape(window.ADE_CODE_KNOWLEDGE[k.id][1])}<small>${k.sources.join(' + ')} → ${k.target}</small></p>`).join('');
+  $('knowledge-notes').innerHTML=knowledge.map(k=>`<p><strong>${k.id} · ${escape(k.title)}</strong> ${escape(k.description)}<small>${k.sources.join(' + ')} → ${k.target}</small></p>${k.quote?`<details class="knowledge-evidence"><summary>Decision evidence · ${escape(k.evidence.record)}</summary><blockquote>${escape(k.quote)}</blockquote></details>`:''}`).join('');
   $('experiment').hidden=state.count===0;requestAnimationFrame(drawConnections);
 }
 function drawConnections(){
@@ -116,11 +118,10 @@ function renderDetail(){
   $('question-label').textContent=n?'Research question':'Research direction';
   $('detail-question').textContent=n?n[2]:p.description;
   $('detail-change').textContent=n?n[3]:p.id===data.selected?info.description:p.description;
-  $('detail-lesson').textContent=n?n[4]:p.conclusion+'.';
+  $('detail-lesson').textContent=n?n[4]:window.ADE_SOURCE_DATA[slug].plans[p.id].finding;
+  renderSource(p.id);
   const relations=sourceRelations(p.id);
   $('detail-parents').innerHTML=relations.length?relations.map(r=>`<button data-parent="${r.source}" title="${escape(r.label||r.kind)}">${r.kind} · ${r.source} ↗</button>`).join(''):'<span>New direction</span>';
-  $('hypothesis-status').textContent=({supported:'Hypothesis supported',rejected:'Hypothesis rejected',inconclusive:'Hypothesis inconclusive',failed:'Failed before evaluation'})[p.hypothesis];
-  $('hypothesis-status').dataset.status=p.hypothesis;
   $('primary-label').textContent=`Validation · ${primaryLabel()}`;$('secondary-label').textContent=`Validation · ${secondaryLabel()}`;
   $('detail-primary').textContent=finite(value(p))?pct(value(p))+'%':'Not evaluated';const secondary=p[info.primary==='pass'?'average':'pass'];
   $('detail-secondary').textContent=finite(secondary)?pct(secondary)+'%':'—';
@@ -128,6 +129,17 @@ function renderDetail(){
   $('heldout-label').textContent=`Operator test · ${info.heldout}`;
   $('detail-heldout').innerHTML=p.operator?`${pct(p.operator[info.primary])}%<small>${primaryLabel()} · ${pct(p.operator[info.primary==='pass'?'average':'pass'])}% ${secondaryLabel()}</small>`:'<small>Not recorded in this snapshot</small>';
   $('compare').disabled=!relations.length;renderTraining();
+}
+let sourceIdentity='';
+function renderSource(id){
+  const record=window.ADE_SOURCE_DATA[slug].plans[id],script=record.script;
+  if(sourceIdentity!==slug+id){$('strategy-source').open=false;sourceIdentity=slug+id}
+  $('source-summary').textContent=script?`View ${slug==='reward'?'reward':'selection'} script · ${id}`:`Reward script unavailable · ${id}`;
+  $('source-note').textContent=script?'Original accepted Python artifact for this Plan. Displayed for inspection; the webpage does not execute it.':'This Plan failed Builder validation and has no accepted reward artifact.';
+  $('source-content').hidden=!script;
+  $('source-code').textContent=script?.text||'';
+  $('source-filename').textContent=script?.filename||'';
+  $('source-checksum').textContent=script?`SHA-256 · ${script.sha256}`:'';
 }
 function renderTraining(){
   const p=plans.get(state.selected),loss=state.curve==='loss';
@@ -175,6 +187,11 @@ $('timeline').addEventListener('input',e=>{stop();replayTo(Number(e.target.value
 $('reset').addEventListener('click',()=>{stop();state.count=data.plans.length;selectPlan(data.selected)});
 $('show-followups').addEventListener('click',()=>{stop();Object.assign(state,{count:data.plans.length,selected:data.selected,view:'ancestry',followups:true});setPressed('[data-view]','ancestry');render();$('board').scrollIntoView({behavior:behavior(),block:'center'})});
 $('download').addEventListener('click',()=>{const payload={...data,task:info.name,primaryMetric:primaryLabel(),onlineMetric:info.onlineLabel,heldoutBenchmark:info.heldout,notes:info.limit,plans:data.plans.map(p=>({...p,title:title(p.id),...(slug==='code'?{narrative:window.ADE_CODE_NARRATIVE[p.id]}:{})}))};const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`ade-${slug}-research.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+$('download-source').addEventListener('click',()=>{
+  const script=window.ADE_SOURCE_DATA[slug].plans[state.selected].script;if(!script)return;
+  const url=URL.createObjectURL(new Blob([script.text],{type:'text/plain;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download=`ade-${slug}-${state.selected.replace('/','-')}-${script.filename}`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
 $('copy-citation').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('bibtex').textContent);$('copy-status').textContent='Copied.'}catch{const range=document.createRange();range.selectNodeContents($('bibtex'));getSelection().removeAllRanges();getSelection().addRange(range);$('copy-status').textContent='Citation selected. Press Ctrl+C / ⌘C to copy.'}});
 window.addEventListener('popstate',()=>selectCase(new URLSearchParams(location.search).get('case')));
 window.addEventListener('resize',()=>requestAnimationFrame(drawConnections));window.addEventListener('scroll',()=>$('chart-tooltip').hidden=true,{passive:true});

@@ -29,8 +29,13 @@ links. The browser back/forward buttons restore the selected case.
 
 - Columns indicate local Plan order; `#` indicates global proposal order.
 - Relations retain their explicit types: revisit, combine or contradiction.
-  Separate curated diagnostic knowledge links are available for the Code case.
-- A selected strategy is not necessarily a supported hypothesis.
+  Knowledge transfer is available for all three cases: 6 Math, 5 Code and 8 Reward
+  links describe the findings that informed subsequent interventions. Math and
+  Reward links include expandable excerpts from the receiving Plan's decision.
+- Each Plan has a collapsed script viewer and a Python download. The 44 accepted
+  selection/reward artifacts are preserved byte-for-byte and include SHA-256
+  checksums. Reward C2/P4 has no accepted script because Builder validation failed.
+  The browser displays the code; it never executes it.
 - Reward Design C2/P4 failed before evaluation. Its score is null, not zero.
   C2/P5 has a score but no accepted agent-authored conclusion.
 - SFT loss and VERL actor loss are labeled separately. Checkpoint markers use
@@ -46,22 +51,27 @@ Curriculum Learning appears in the paper results, but has no interactive case.
 
 ## Regenerate snapshots
 
-The public snapshots contain only display labels, scores, curve points and
-relationships. Original Run identities, deployment paths, credentials and raw
-model responses stay outside the site. Exporters read an already restored archive;
+The public snapshots contain display labels, scores, curve points, relationships,
+curated decision excerpts and accepted strategy source code. Deployment paths,
+credentials and raw model responses stay outside the site.
+Exporters read an already restored archive;
 they do not download data, execute archived code or run training.
 
 From the repository root, with Node.js 22+ and `unzip` installed:
 
 ```bash
 node scripts/export_research_demo.mjs <RESTORED_ARCHIVE_ROOT>
+node scripts/export_homepage_evidence.mjs <RESTORED_ARCHIVE_ROOT>
 node scripts/export_paper_results.mjs <EXTRACTED_PAPER_SOURCE>
 ```
 
 The restored root contains `repositories/agentic-data-engineering/`. The paper
 source contains `section/experiments.tex`. The first command validates accepted
 Plan scores and relation chronology, then exports the Math and Reward snapshots
-to `additional-cases.js`. The second extracts Table 3's four tasks, four methods
+to `additional-cases.js`. The evidence exporter checks Plan/Trial artifact identity
+and content hashes, and checks curated quotations and source-before-decision
+chronology before writing `source-data.js`. Its editable evidence descriptions
+are in `knowledge-curation.json`. The results exporter extracts Table 3's four tasks, four methods
 and six benchmark columns into `results-data.js`, retaining the printed precision.
 `case-copy.js` contains the existing curated Code narrative.
 
@@ -75,7 +85,8 @@ local deployment:
 ```
 
 For browser verification, cover all three cases, both curve modes, failed and
-missing-data states, replay/reset, source navigation, downloads, direct links,
+missing-data states, replay/reset, source navigation, knowledge links, script
+viewing and downloads, direct links,
 the four results tabs, and narrow screens. The files also work over `file://`;
 when clipboard access is unavailable, the citation button selects the text for
 manual copying.

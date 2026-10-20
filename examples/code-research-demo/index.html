@@ -12,6 +12,7 @@
   <script defer src="additional-cases.js"></script>
   <script defer src="case-copy.js"></script>
   <script defer src="results-data.js"></script>
+  <script defer src="source-data.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -66,9 +67,10 @@
 
       <section class="detail-section" id="experiment" aria-labelledby="detail-heading">
         <div class="detail-heading"><div><span class="plan-pill" id="detail-id"></span><h3 id="detail-heading"></h3></div><span class="winner-badge" id="winner-badge">★ Selected by validation</span></div>
-        <div class="detail-layout"><div class="detail-story"><p id="detail-description" class="detail-intro"></p><div class="story-block"><h4 id="question-label">Research question</h4><p id="detail-question"></p></div><div class="story-block"><h4>The intervention</h4><p id="detail-change"></p></div><div class="story-block"><h4>Recorded finding</h4><p id="detail-lesson"></p></div><div class="parent-box"><h4>Explicit Plan relations</h4><div id="detail-parents"></div></div><p class="hypothesis-note"><strong id="hypothesis-status"></strong><br>Hypothesis assessment is separate from score-based selection.</p></div>
+        <div class="detail-layout"><div class="detail-story"><p id="detail-description" class="detail-intro"></p><div class="story-block"><h4 id="question-label">Research question</h4><p id="detail-question"></p></div><div class="story-block"><h4>The intervention</h4><p id="detail-change"></p></div><div class="story-block"><h4>What happened</h4><p id="detail-lesson"></p></div><div class="parent-box"><h4>Explicit Plan relations</h4><div id="detail-parents"></div></div></div>
           <div class="evidence-panel"><div class="scorecards"><div><span id="primary-label"></span><strong id="detail-primary"></strong><small id="detail-delta"></small></div><div><span id="secondary-label"></span><strong id="detail-secondary"></strong><small>Same final evaluation protocol</small></div></div><div class="curve-toolbar"><div class="segmented" role="group" aria-label="Training chart"><button data-curve="loss" class="active" aria-pressed="true">Training loss</button><button data-curve="validation" aria-pressed="false">Online validation</button></div><label><input type="checkbox" id="compare" checked> Compare sources</label></div><div id="training-chart"></div><div class="curve-meta"><span id="curve-stop"></span><span id="checkpoint-tag"></span></div><div id="curve-legend" class="chart-legend"></div><p class="caption" id="curve-caption"></p><div class="heldout-box"><div><span id="heldout-label"></span><small>Held out from strategy selection</small></div><strong id="detail-heldout"></strong></div></div>
         </div>
+        <details class="strategy-source" id="strategy-source"><summary id="source-summary">View selection script</summary><p id="source-note"></p><div id="source-content"><div class="source-toolbar"><span id="source-filename"></span><button id="download-source">Download script ↓</button></div><pre tabindex="0" aria-label="Recorded strategy source code"><code id="source-code"></code></pre><details class="source-provenance"><summary>Artifact checksum</summary><p id="source-checksum"></p></details></div></details>
       </section>
       <div class="case-insights"><h3>What this case teaches</h3><div id="insight-grid" class="insight-grid"></div><p class="caption" id="case-limit"></p></div>
       <div class="case-actions"><button id="show-followups">Highlight direct follow-ups ↗</button><button id="download">Download this case’s data ↓</button><a id="case-paper" href="https://arxiv.org/pdf/2610.14238">Related paper section ↗</a><a id="case-permalink" href="?case=code#research">Link to this case ↗</a></div>

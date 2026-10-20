@@ -18,7 +18,7 @@ window.ADE_CODE_NARRATIVE = {
     "Keep the exposure. Change the repetition.",
     "Does reducing repetition help when reasoning length and prompt type remain comparable?",
     "Replace highly repetitive parent records with low-repetition candidates matched by prompt type, truncation status and length band, then nearest token count.",
-    "The best in-loop score, with the parent’s 142 / 107 / 135 length allocation preserved. Its hypothesis remained inconclusive; all three lanes reused the strategy."
+    "Pass@3 reached 48.06% and Average@3 reached 33.03%, the best in-loop result. The parent’s 142 / 107 / 135 length allocation was preserved, and all three Coordinators later reused the strategy."
   ],
   "C1/P4": [
     "Wrapper closure",

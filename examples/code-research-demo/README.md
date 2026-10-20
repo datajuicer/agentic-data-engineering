@@ -1,5 +1,9 @@
 # ADE research homepage
 
+[Homepage](https://datajuicer.github.io/agentic-data-engineering/) is published
+through this repository's GitHub Pages workflow. Changes to this directory on
+`main` deploy automatically.
+
 Open [index.html](index.html) in a browser. The complete directory is a buildless,
 offline-capable research homepage and can be served by any static host. The
 original directory name is retained for existing links.

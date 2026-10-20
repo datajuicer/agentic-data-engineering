@@ -4,8 +4,7 @@
 
 **ADE — agents that develop data selection, reward and curriculum strategies through controlled experiments.**
 
-<!-- [Live Demo](https://ade-code-research.ruomengd.chatgpt.site) -->
-[🏠 Homepage](examples/code-research-demo/README.md) · [🚀 Quickstart](docs/en/quickstart.md) · [🧭 Walkthrough](docs/en/walkthrough.md) · [📚 Documentation](docs/en/README.md) · [📄 Paper](https://arxiv.org/pdf/2610.14238)
+[🏠 Homepage](https://datajuicer.github.io/agentic-data-engineering/) · [🚀 Quickstart](docs/en/quickstart.md) · [🧭 Walkthrough](docs/en/walkthrough.md) · [📚 Documentation](docs/en/README.md) · [📄 Paper](https://arxiv.org/pdf/2610.14238)
 
 </div>
 

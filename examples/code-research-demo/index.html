@@ -3,92 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#153e35">
-  <meta name="description" content="Explore a real ADE research trajectory: one run, three collaborating agents, and a better way to select training data.">
-  <title>ADE — A study in shared discovery</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Agentic Data Engineering for LLMs: a controlled study of agent-developed data selection, rewards and curricula. Explore results and three recorded research trajectories.">
+  <title>Agentic Data Engineering for LLMs</title>
   <link rel="icon" href="mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script defer src="case-data.js"></script>
+  <script defer src="additional-cases.js"></script>
+  <script defer src="case-copy.js"></script>
+  <script defer src="results-data.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#research" data-i18n="skip">Skip to research explorer</a>
-  <header class="site-header">
-    <a class="brand" href="#" aria-label="ADE home"><img src="mark.svg" alt="" width="35" height="35"><span>ADE<span class="brand-sub">RESEARCH ATLAS</span></span></a>
-    <nav aria-label="Main navigation"><a href="#research" data-i18n="navExplore">The experiments</a><a href="#insights" data-i18n="navLearn">What changed</a><a href="#method" data-i18n="navMethod">The setup</a></nav>
-  </header>
-  <main>
-    <section class="hero wrap">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="tiny-star">✳</span> <span data-i18n="heroLabel">A FIELD STUDY IN AGENTIC DATA ENGINEERING</span></div>
-        <h1 data-i18n-html="heroTitle">Better data.<br>Through <em>shared<br>discovery.</em></h1>
-        <p class="hero-description" data-i18n="heroDescription">Follow three research agents as they test, learn, and build on each other’s findings. One code data-selection run. Fifteen Plans that build on shared findings.</p>
-        <div class="hero-actions"><a class="button primary" href="#research"><span data-i18n="explore">Explore the research</span><span aria-hidden="true">↗</span></a><span class="quiet-note"><span class="live-dot"></span><span data-i18n="recorded">An interactive, recorded case</span></span></div>
-      </div>
-      <div class="hero-art" aria-label="The selected strategy and the findings that informed it">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
-        <div class="art-kicker"><span>01 — CODE DATA SELECTION</span><span class="art-cross">＋</span></div>
-        <div class="floating-tag tag-one"><span class="tag-dot cobalt"></span><span data-i18n="lengthMatch">Match the length</span><span class="tag-code">K2</span></div>
-        <div class="floating-tag tag-two"><span class="tag-dot copper"></span><span data-i18n="signal">Make the signal observable</span><span class="tag-code">K3</span></div>
-        <div class="specimen">
-          <div class="specimen-top"><span class="specimen-label" data-i18n="selectedStrategy">SELECTED STRATEGY</span><span class="star-stamp">✳</span></div>
-          <div class="specimen-plan">C1 / P3</div>
-          <h2 data-i18n="winnerTitle">Stratified<br>repetition control</h2>
-          <div class="specimen-rule"></div>
-          <div class="specimen-score"><span>48.06<small>%</small></span><div><b>PASS@3</b><small data-i18n="inloop">In-loop validation</small></div></div>
-          <div class="specimen-gain"><span>↗ +8.20 <span data-i18n="pp">pp</span></span><span data-i18n="overBaseline">over the baseline</span></div>
-          <svg class="specimen-spark" viewBox="0 0 280 42" role="img" aria-label="Best validation score improves over completed Plans"><path id="hero-spark" d=""/><circle cx="270" cy="7" r="3"/></svg>
+<a class="skip-link" href="#research">Skip to interactive research explorer</a>
+<header class="site-header"><a class="brand" href="#top">ADE<span>Agentic Data Engineering</span></a><nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#findings">Insights</a><a href="#research">Demos</a><a href="#citation">Cite</a></nav></header>
+<main id="top">
+  <section class="paper-intro wrap" aria-labelledby="paper-title">
+    <div class="eyebrow">RESEARCH PAPER · AI FOR AI</div>
+    <h1 id="paper-title">Agentic Data Engineering for LLMs:<br><span>System Design and a Controlled Empirical Study</span></h1>
+    <p class="authors">Ruomeng Ding<sup>1,*</sup>, Qianli Shen<sup>2</sup>, Zhaoyang Han<sup>3,*</sup>, Meixin Chen<sup>2</sup>, Daoyuan Chen<sup>2,†</sup>, Yaliang Li<sup>2,†</sup></p>
+    <p class="affiliations"><sup>1</sup> UNC–Chapel Hill &nbsp; <sup>2</sup> Alibaba Group &nbsp; <sup>3</sup> Peking University</p>
+    <p class="author-notes">* Work done during internships at Alibaba Group. † Corresponding authors.</p>
+    <div class="paper-links"><a class="button primary" href="https://arxiv.org/pdf/2610.14238">Read paper ↗</a><a class="button" href="https://github.com/datajuicer/agentic-data-engineering">Code ↗</a><a class="button" href="#research">Explore three cases ↓</a><a class="text-link" href="#citation">BibTeX</a></div>
+    <p class="abstract">Can agents use experimental feedback to develop better training data, rewards and curricula? ADE lets research agents propose, revise and combine strategies using cumulative findings, while a fixed experimental protocol controls training and evaluation. We study both the strategies they discover and the research process that produces them.</p>
+    <div class="headline-results" aria-label="Selected findings"><div><strong>+13.34 <small>pp</small></strong><span>AIME25 Pass@32 over the baseline<br>Math selection · C = 1 · Best Run</span></div><div><strong>+5.85 <small>pp</small></strong><span>Mean held-out Pass@K over four benchmarks<br>Math selection · C = 1 · Best Run</span></div><div><strong>4 <small>tasks</small></strong><span>Math and code selection, reward design,<br>and curriculum learning</span></div></div>
+  </section>
+
+  <section class="paper-section wrap" id="method">
+    <div class="section-heading"><div class="eyebrow">01 / METHOD</div><h2>Research decisions belong to agents. Experimental control stays fixed.</h2><p>ADE separates the research process from the machinery that executes and evaluates each experiment.</p></div>
+    <div class="method-principles"><article><h3>Develop strategies from evidence</h3><p>Coordinators propose research directions. Builders implement them. Analyzers interpret experimental evidence, and Plan and Run Memory carry accepted findings into later decisions.</p></article><article><h3>Select in-loop; evaluate held-out</h3><p>The Harness enforces the task contract. The Engine trains and evaluates under fixed conditions. Strategy selection uses in-loop scores; held-out evaluation assesses frozen checkpoints and never feeds back into research.</p></article></div>
+    <figure class="paper-figure"><a href="assets/pipeline.pdf" target="_blank" rel="noopener" aria-label="Open the ADE framework diagram at full size"><img src="assets/pipeline.png" width="1531" height="810" alt="ADE architecture: research agents develop Plans through shared Memory; a Harness controls execution; the Engine produces evidence; held-out evaluation remains external."></a><figcaption>ADE’s research loop: proposal → implementation → controlled experiment → analysis → cumulative Memory. <a href="https://arxiv.org/pdf/2610.14238#page=3">Method details ↗</a></figcaption></figure>
+    <div class="table-scroll"><table class="settings-table"><caption>What agents can change</caption><thead><tr><th scope="col">Task</th><th scope="col">Intervention</th><th scope="col">Fixed training setup</th><th scope="col">Generic baseline</th></tr></thead><tbody><tr><th scope="row">Data selection · Math / Code</th><td>Choose 384 of 3,840 trajectories</td><td>Qwen2.5-7B-Instruct · Long-CoT SFT</td><td>Random subset</td></tr><tr><th scope="row">Reward design · Math</th><td>Reward and group credit</td><td>Qwen2.5-0.5B · 100 RFT steps</td><td>Outcome-only reward</td></tr><tr><th scope="row">Curriculum learning · Math</th><td>Training-data schedule</td><td>Same RFT setup; fixed outcome reward</td><td>Random ordering</td></tr></tbody></table></div>
+  </section>
+
+  <section class="paper-section wrap" id="results">
+    <div class="section-heading"><div class="eyebrow">02 / RESULTS</div><h2>Selected strategies improve held-out coverage across all four tasks.</h2><p>Both research capacities improve held-out Macro Avg. Pass@K over the generic baseline. Gains in average correctness vary by task.</p></div>
+    <div class="segmented task-tabs" id="result-tabs" role="group" aria-label="Results task"></div>
+    <div class="result-summary" id="result-summary"></div>
+    <div class="table-scroll" id="results-table"></div>
+    <p class="caption" id="results-note"></p>
+    <p class="caption">Table 3 · Each ADE row is the <strong>Best Run selected by in-loop scores</strong> among three Runs at that capacity, not the across-Run mean. Cells show Pass@K / Average@K (%). Macro Avg. weights the four held-out benchmarks equally. <a href="https://arxiv.org/pdf/2610.14238#page=6">Full results ↗</a></p>
+  </section>
+
+  <section class="paper-section wrap" id="findings">
+    <div class="section-heading"><div class="eyebrow">03 / RESEARCH INSIGHTS</div><h2>A better search score is only part of the story.</h2></div>
+    <div class="findings-list"><article><span class="finding-number">01</span><div><h3>Later in-loop gains can stop transferring.</h3><p>For math selection at C = 3, mean AIME25 Pass@32 peaks at 46.67% and ends at 41.11%, while mean in-loop Pass@32 rises from 47.78% to 54.44% over the later phase. The final held-out score remains above the baseline, but continued search is not a guarantee of better generalization.</p></div></article><article><span class="finding-number">02</span><div><h3>Evidence interpretation and cumulative findings matter.</h3><p>On math selection, ADE’s selected C = 1 strategy exceeds unified-agent, independent-search, outcome-only and raw-evidence alternatives on both in-loop metrics and mean held-out scores. Its held-out Macro Avg. Pass@K is 65.58%, versus 62.97% for the strongest alternative on that metric.</p></div></article><article><span class="finding-number">03</span><div><h3>More research capacity has task-dependent returns.</h3><p>Three Coordinators improve final mean in-loop scores over one, at higher token use and triple the peak GPU allocation. Held-out returns differ by task. Experiment execution and waiting occupy 57–69% of Plan time at C = 1.</p></div></article></div>
+    <details class="figure-details"><summary>Inspect research progress, held-out trajectories and cost <span>Figure 3</span></summary><figure class="paper-figure"><a href="assets/research-progress.png" target="_blank" rel="noopener"><img src="assets/research-progress.png" loading="lazy" alt="Paper Figure 3: in-loop progress, held-out scores, cumulative token cost and GPU-hours for three tasks at C=1 and C=3."></a><figcaption>Lines average three Runs per task and capacity; shading shows min–max ranges. Held-out curves follow the models selected using in-loop scores. <a href="https://arxiv.org/pdf/2610.14238#page=7">Sections 4.2–4.3 ↗</a></figcaption></figure></details>
+  </section>
+
+  <section class="paper-section explorer-section" id="research">
+    <div class="wrap">
+      <div class="section-heading"><div class="eyebrow">04 / INTERACTIVE RESEARCH CASES</div><h2>Follow the experiments behind three selected strategies.</h2><p>Three recorded C = 3 Runs, fifteen Plans each. Explore proposals, inherited strategies, findings and training curves. These are individual research trajectories, not aggregate results.</p></div>
+      <div class="case-tabs" id="case-tabs" role="group" aria-label="Choose a research case"></div>
+      <div class="case-overview" aria-live="polite"><div><div class="eyebrow" id="case-kind"></div><h3 id="case-title"></h3><p id="case-description"></p></div><div class="case-score"><span id="case-selected"></span><strong id="case-score"></strong><span id="case-metric"></span><small id="case-gain"></small></div></div>
+      <p class="caption" id="case-protocol"></p>
+      <div class="research-toolbar"><div class="segmented" role="group" aria-label="Relationship view"><button data-view="ancestry" class="active" aria-pressed="true">Strategy relations</button><button data-view="knowledge" aria-pressed="false">Knowledge transfer</button></div><div class="replay-controls"><button id="play" aria-label="Replay Plans">▶ Replay</button><input type="range" id="timeline" min="0" max="15" value="15" aria-label="Finished Plans"><span id="replay-count">15 / 15</span><button id="reset" aria-label="Reset to selected strategy">↺ Reset</button></div></div>
+      <div class="board-scroll" tabindex="0" role="region" aria-label="Research Plan board, scroll horizontally on small screens"><div class="board" id="board"><svg id="connections" aria-hidden="true"></svg><div id="lanes"></div></div></div>
+      <div class="board-footer"><span id="connection-legend"></span><span>Columns: local Plan order · # indicates global proposal order</span></div>
+      <p class="replay-status" id="replay-status" aria-live="polite"></p>
+      <div class="knowledge-notes" id="knowledge-notes" hidden></div>
+      <div class="progress-panel"><div><h3>Progress through the search</h3><p id="progress-description"></p><div class="chart-legend"><span><i class="line-swatch"></i>Best so far</span><span><i class="dot"></i>Plan score</span><span><i class="dash"></i>Baseline</span></div></div><div id="progress-chart"></div></div>
+
+      <section class="detail-section" id="experiment" aria-labelledby="detail-heading">
+        <div class="detail-heading"><div><span class="plan-pill" id="detail-id"></span><h3 id="detail-heading"></h3></div><span class="winner-badge" id="winner-badge">★ Selected by validation</span></div>
+        <div class="detail-layout"><div class="detail-story"><p id="detail-description" class="detail-intro"></p><div class="story-block"><h4 id="question-label">Research question</h4><p id="detail-question"></p></div><div class="story-block"><h4>The intervention</h4><p id="detail-change"></p></div><div class="story-block"><h4>Recorded finding</h4><p id="detail-lesson"></p></div><div class="parent-box"><h4>Explicit Plan relations</h4><div id="detail-parents"></div></div><p class="hypothesis-note"><strong id="hypothesis-status"></strong><br>Hypothesis assessment is separate from score-based selection.</p></div>
+          <div class="evidence-panel"><div class="scorecards"><div><span id="primary-label"></span><strong id="detail-primary"></strong><small id="detail-delta"></small></div><div><span id="secondary-label"></span><strong id="detail-secondary"></strong><small>Same final evaluation protocol</small></div></div><div class="curve-toolbar"><div class="segmented" role="group" aria-label="Training chart"><button data-curve="loss" class="active" aria-pressed="true">Training loss</button><button data-curve="validation" aria-pressed="false">Online validation</button></div><label><input type="checkbox" id="compare" checked> Compare sources</label></div><div id="training-chart"></div><div class="curve-meta"><span id="curve-stop"></span><span id="checkpoint-tag"></span></div><div id="curve-legend" class="chart-legend"></div><p class="caption" id="curve-caption"></p><div class="heldout-box"><div><span id="heldout-label"></span><small>Held out from strategy selection</small></div><strong id="detail-heldout"></strong></div></div>
         </div>
-        <div class="art-footer"><span data-i18n="sharedPool">SAME POOL. SHARED KNOWLEDGE.</span><span class="mini-grid" aria-hidden="true">▦</span></div>
-      </div>
-    </section>
-    <section class="stats-strip wrap" aria-label="Experiment facts">
-      <div><strong>3</strong><span data-i18n="statsAgents">Coordinators<br>exploring in parallel</span></div>
-      <div><strong>15</strong><span data-i18n="statsPlans">Plans<br>with shared findings</span></div>
-      <div><strong>384<span class="stat-small"> / 3,840</span></strong><span data-i18n="statsData">Selected trajectories<br>from one fixed pool</span></div>
-      <div><strong>+6.35<span class="stat-small"> pp</span></strong><span data-i18n="statsHeldout">Operator-test Pass@3<br>over the baseline</span></div>
-    </section>
+      </section>
+      <div class="case-insights"><h3>What this case teaches</h3><div id="insight-grid" class="insight-grid"></div><p class="caption" id="case-limit"></p></div>
+      <div class="case-actions"><button id="show-followups">Highlight direct follow-ups ↗</button><button id="download">Download this case’s data ↓</button><a id="case-paper" href="https://arxiv.org/pdf/2610.14238">Related paper section ↗</a><a id="case-permalink" href="?case=code#research">Link to this case ↗</a></div>
+    </div>
+  </section>
 
-    <section class="research-section" id="research">
-      <div class="wrap">
-        <div class="section-heading"><div><div class="eyebrow" data-i18n="sectionOne">01 / THE RESEARCH EXPLORER</div><h2 data-i18n-html="researchTitle">Every experiment leaves<br><em>something to learn.</em></h2></div><p data-i18n="researchDescription">Trace the strategies that were inherited, and the ideas that travelled further. Select any experiment to look inside.</p></div>
-        <div class="research-toolbar">
-          <div class="segmented" role="group" aria-label="Relationship view"><button data-view="ancestry" class="active" aria-pressed="true" data-i18n="ancestry">Strategy ancestry</button><button data-view="knowledge" aria-pressed="false" data-i18n="knowledge">Knowledge transfer</button></div>
-          <div class="replay-controls"><button id="play" class="icon-button" aria-label="Replay completed Plans"><span id="play-icon">▶</span><span id="play-label" data-i18n="replay">Replay</span></button><input type="range" id="timeline" min="0" max="15" value="15" aria-label="Completed Plans"><span id="replay-count">15 / 15</span><button id="reset" class="reset-button" aria-label="Show all Plans">↺</button></div>
-        </div>
-        <div class="board-scroll"><div class="board" id="board"><svg id="connections" class="connections" aria-hidden="true"></svg><div id="lanes"></div></div></div>
-        <div class="board-footer"><span><i class="legend-line"></i><span id="connection-legend" data-i18n="ancestryLegend">Recorded strategy inheritance · select a card to trace its connections</span></span><span data-i18n="boardNote">Columns are local Plan order, not synchronized rounds.</span></div>
-        <p id="replay-status" class="replay-status" aria-live="polite"></p>
-
-        <div class="progress-panel">
-          <div class="progress-copy"><span class="eyebrow" data-i18n="progressLabel">THE SEARCH, AS IT UNFOLDED</span><h3 data-i18n="progressTitle">Progress is rarely a straight line.</h3><p data-i18n="progressDescription">Some experiments improve the score. Others improve the next question.</p><div class="chart-legend"><span><i class="dot green"></i><span data-i18n="bestSoFar">Best so far</span></span><span><i class="dot muted"></i><span data-i18n="trialScore">Experiment</span></span><span><i class="dash"></i><span data-i18n="baseline">Baseline</span></span></div></div>
-          <div class="progress-chart" id="progress-chart"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="detail-section wrap" id="experiment" aria-labelledby="detail-heading">
-      <div class="detail-heading"><div><span class="eyebrow" data-i18n="sectionTwo">02 / INSIDE THE EXPERIMENT</span><div class="detail-title-line"><span id="detail-id" class="plan-pill"></span><h2 id="detail-heading"></h2></div></div><span id="winner-badge" class="winner-badge" data-i18n="selectedByValidation">✳ Selected by validation</span></div>
-      <div class="detail-layout">
-        <div class="detail-story"><p class="detail-intro" id="detail-description"></p><div class="story-block"><span class="story-number">01</span><div><h3 data-i18n="questionLabel">The question</h3><p id="detail-question"></p></div></div><div class="story-block"><span class="story-number">02</span><div><h3 data-i18n="changeLabel">The intervention</h3><p id="detail-change"></p></div></div><div class="story-block"><span class="story-number">03</span><div><h3 data-i18n="lessonLabel">What it taught the search</h3><p id="detail-lesson"></p></div></div><div class="parent-box"><span data-i18n="builtFrom">BUILT FROM</span><div id="detail-parents"></div></div><div class="hypothesis-note"><span id="hypothesis-dot"></span><div><strong id="hypothesis-status"></strong><p data-i18n="hypothesisNote">Hypothesis assessment is separate from score-based selection.</p></div></div></div>
-        <div class="evidence-panel">
-          <div class="scorecards"><div><span data-i18n="validationPass">Validation · Pass@3</span><strong id="detail-pass"></strong><small id="detail-delta"></small></div><div><span data-i18n="validationAvg">Validation · Average@3</span><strong id="detail-average"></strong><small data-i18n="sameProtocol">Same evaluation protocol</small></div></div>
-          <div class="curve-toolbar"><div class="segmented compact" role="group" aria-label="Training chart"><button data-curve="loss" class="active" aria-pressed="true" data-i18n="loss">Training loss</button><button data-curve="validation" aria-pressed="false" data-i18n="online">Online validation</button></div><label class="compare-label"><input type="checkbox" id="compare" checked><span data-i18n="compareParent">Compare parent</span></label></div>
-          <div class="training-chart" id="training-chart"></div>
-          <div class="curve-meta"><span id="curve-stop"></span><span id="checkpoint-tag"></span></div>
-          <div id="curve-legend" class="chart-legend"></div>
-          <p class="curve-caption" id="curve-caption"></p>
-          <div class="heldout-box"><div><span class="eyebrow" data-i18n="heldoutLabel">OPERATOR TEST · LATER LIVECODEBENCH SPLIT</span><p data-i18n="heldoutNote">Held out from strategy selection.</p></div><strong id="detail-heldout"></strong></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="insight-section" id="insights"><div class="wrap"><div class="section-heading"><div><div class="eyebrow" data-i18n="sectionThree">03 / KNOWLEDGE THAT CROSSED BRANCHES</div><h2 data-i18n-html="insightTitle">A better answer starts with<br><em>a better question.</em></h2></div><p data-i18n="insightDescription">The selected strategy inherited one subset. Its reasoning drew on several experiments.</p></div><div class="insight-grid" id="insight-grid"></div><div class="insight-bottom"><span class="insight-star">✳</span><p data-i18n="insightBottom">After C1/P3 became the leader, all three Coordinators revisited it—testing wrapper closure, example correctness, earlier code, and image-marker removal.</p><button class="text-button" id="show-followups"><span data-i18n="followups">See the follow-up experiments</span> ↗</button></div></div></section>
-
-    <section class="method-section wrap" id="method"><div><div class="eyebrow" data-i18n="sectionFour">04 / THE EXPERIMENTAL SETUP</div><h2 data-i18n-html="methodTitle">Change the selection.<br><em>Hold the rest steady.</em></h2><p data-i18n="methodDescription">Each strategy selects complete trajectories from the same mixed-domain OpenThoughts pool. The target model, training recipe, and evaluation protocol stay fixed.</p><button class="button secondary" id="download"><span data-i18n="download">Download the displayed data</span> ↓</button></div><div class="method-table"><div><span data-i18n="targetModel">Target model</span><strong>Qwen2.5-7B-Instruct</strong></div><div><span data-i18n="trainingPool">Training pool</span><strong data-i18n="poolValue">3,840 OpenThoughts trajectories</strong></div><div><span data-i18n="selectionBudget">Selection budget</span><strong data-i18n="budgetValue">384 whole trajectories per Trial</strong></div><div><span data-i18n="selectionSignal">Strategy selection</span><strong data-i18n="signalValue">In-loop Pass@3; Average@3 breaks ties</strong></div><div><span data-i18n="trainingEnd">Training</span><strong data-i18n="endValue">Recorded steps · early stopping</strong></div><div><span data-i18n="baseline">Baseline</span><strong id="baseline-summary"></strong></div></div></section>
-  </main>
-  <footer class="site-footer wrap"><a class="brand" href="#"><img src="mark.svg" alt="" width="29" height="29"><span>ADE</span></a><p data-i18n="footer">Agentic Data Engineering · A real research trajectory, made explorable.</p><a href="#" data-i18n="backTop">Back to top ↑</a></footer>
-  <div id="chart-tooltip" class="chart-tooltip" role="status" hidden></div>
-  <noscript><p class="noscript">Enable JavaScript to explore the recorded research and curves. No network connection is required.</p></noscript>
+  <section class="paper-section wrap" id="citation"><div class="section-heading"><div class="eyebrow">05 / CITATION</div><h2>Cite this work</h2></div><div class="citation-toolbar"><span>BibTeX</span><button id="copy-citation">Copy citation</button><span id="copy-status" role="status"></span></div><pre id="bibtex">@misc{ding2026agenticdataengineeringllms,
+  title={Agentic Data Engineering for LLMs: System Design and a Controlled Empirical Study},
+  author={Ruomeng Ding and Qianli Shen and Zhaoyang Han and Meixin Chen and Daoyuan Chen and Yaliang Li},
+  year={2026},
+  eprint={2610.14238},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2610.14238}
+}</pre></section>
+</main>
+<footer class="wrap"><span>ADE · Agentic Data Engineering</span><a href="https://github.com/datajuicer/agentic-data-engineering">Code ↗</a><a href="#top">Back to top ↑</a></footer>
+<div id="chart-tooltip" class="chart-tooltip" role="status" hidden></div>
+<noscript><p class="noscript">Enable JavaScript for the results table and interactive cases. Read the full results in the linked paper.</p></noscript>
 </body>
 </html>

@@ -14,9 +14,10 @@ LLM data engineering requires iterative experimentation on data selection, rewar
 **Start here:** [Install](docs/en/installation.md) → [Prepare inputs](docs/en/data-preparation.md) →
 [Configure deployment](docs/en/deployment.md) → [Give an Operation Prompt to the operator agent](docs/en/quickstart.md).
 
-<!--
-**[Explore the interactive demo](https://ade-code-research.ruomengd.chatgpt.site)** — Follow a code data-selection run through strategy development, shared findings and recorded training curves.
--->
+**[Homepage](examples/code-research-demo/README.md)** —
+Explore the paper's method, four-task results and findings, then follow three
+recorded research trajectories for math selection, code selection and reward design.
+Open the local page in a browser; no installation is required.
 
 ## Framework
 

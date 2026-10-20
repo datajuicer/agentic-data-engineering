@@ -25,8 +25,10 @@ Start the supervising Agent using the
 
 Use [generalization-operation.yaml](generalization-operation.yaml) after selecting checkpoints by in-loop validation. Keep the desired task suites and fill accepted artifact references. Follow the [guide](../docs/en/generalization.md) for dataset preparation, the distinction from operator test and execution.
 
-<!--
-## Interactive research demo
+## Research homepage and interactive demos
 
-Open the [code research demo](https://ade-code-research.ruomengd.chatgpt.site) to explore a recorded 15-Plan trajectory, strategy ancestry, knowledge transfer and real training curves. The [local version](code-research-demo/README.md) also works offline without installation.
--->
+Open the [research homepage](code-research-demo/README.md) for the paper's method,
+results across four tasks and research insights. Its explorer includes three
+recorded C=3 Runs: math data selection, code data selection and math reward design.
+Each case contains 15 Plans, explicit Plan relations, hypothesis assessments and
+recorded training and online-validation curves. It works offline without installation.

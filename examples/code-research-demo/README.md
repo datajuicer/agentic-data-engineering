@@ -37,6 +37,8 @@ links. The browser back/forward buttons restore the selected case.
   checksums. Reward C2/P4 has no accepted script because Builder validation failed.
   The browser displays the code; it never executes it.
 - Reward Design C2/P4 failed before evaluation. Its score is null, not zero.
+  Its case records the validator's raw-process-dimension access error and the
+  exhausted Builder retries; the failure is not a measured reward-quality result.
   C2/P5 has a score but no accepted agent-authored conclusion.
 - SFT loss and VERL actor loss are labeled separately. Checkpoint markers use
   recorded epochs or RL steps, independently of the last training point.

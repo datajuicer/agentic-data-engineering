@@ -47,7 +47,19 @@ for (const [slug, suffix] of Object.entries({math:'e2649a', code:'b823bb', rewar
     } else {
       assert.equal(p.status,'failed');
     }
-    let finding = 'Builder validation failed before training, so this Plan has no validation score or accepted reward script.';
+    let failure = null;
+    let finding;
+    if (!ref) {
+      const record = JSON.parse(artifact(trial.analysis_failure_ref_id).text);
+      assert.equal(trial.failure_kind,'builder_validation_failed');
+      const messages = [...new Set(record.violations.map(v=>v.message))];
+      failure = {
+        reason:record.reason,
+        messages,
+        explanation:'The last submitted code read conclusion_support and derivation_soundness through intermediate variables. The validator still rejected it; the record does not establish why that access failed validation.'
+      };
+      finding = `Script validation rejected assign_group_credit: “${messages.join('; ')}”. The initial submission and three retries did not pass, exhausting the Builder retry budget. Training and evaluation never started, so this is a build failure, not an observed loss in reward quality.`;
+    }
     if (p.validation_score != null) {
       const label = slug==='reward'?'Average@3':slug==='math'?'Pass@32':'Pass@3';
       const second = slug==='reward'?'Pass@3':slug==='math'?'Average@32':'Average@3';
@@ -65,7 +77,7 @@ for (const [slug, suffix] of Object.entries({math:'e2649a', code:'b823bb', rewar
       if (slug==='math' && id==='C1/P5') finding += ' The proposed independent-reference handoff was not realized, so the score does not test that intended change.';
       if (slug==='reward' && id==='C2/P5') finding += ' The archive contains the evaluation but no accepted agent-written analysis of this result.';
     }
-    plans[id] = {script,finding};
+    plans[id] = {script,finding,...(failure?{failure}:{})};
   }
   const knowledge = (curation[slug] || []).map(k=>{
     const target = originals.get(k.target);

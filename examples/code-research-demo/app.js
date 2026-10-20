@@ -21,7 +21,7 @@ const meta = {
     description:'C1/P3 moves from relative process quality to absolute eligibility and then sibling corroboration. Credit depends on group correctness; in all-wrong groups, positive shaping requires corroborating process evidence.',
     protocol:'Qwen2.5-0.5B · 100 RFT steps · MATH-S Average@3, then Pass@3 for ties. One of the fifteen Plans failed before evaluation.',
     limit:'C2/P5 has a score but no accepted agent-authored conclusion. The failed C2/P4 is not assigned a zero score.',
-    insights:[['From relative to corroborated credit','C1’s first two proposals regressed. Requiring sibling corroboration produced the selected 36.67% Average@3 strategy.','C1/P3'],['Useful parallel alternatives','C3 combined failed-progress discrimination with C2’s outcome anchoring. Its later refinements did not exceed C1/P3.','C3/P4'],['Failure is a distinct outcome','C2/P4’s negative-evidence veto failed during Builder validation. It has no validation score.','C2/P4']]},
+    insights:[['From relative to corroborated credit','C1’s first two proposals regressed. Requiring sibling corroboration produced the selected 36.67% Average@3 strategy.','C1/P3'],['Useful parallel alternatives','C3 combined failed-progress discrimination with C2’s outcome anchoring. Its later refinements did not exceed C1/P3.','C3/P4'],['Failure is a distinct outcome','C2/P4’s script was rejected for not directly using the raw process dimensions. Three retries exhausted the Builder budget before training.','C2/P4']]},
 };
 const cases = {math:window.ADE_ADDITIONAL_CASES.math,code:window.ADE_CASE,reward:window.ADE_ADDITIONAL_CASES.reward};
 for(const key of ['math','reward']) cases[key].knowledge=window.ADE_SOURCE_DATA[key].knowledge;
@@ -71,7 +71,7 @@ function renderBoard(){
   $('connection-legend').textContent=state.view==='knowledge'?'K: recorded diagnostic transfer · distinct from artifact inheritance':'R: revisit · C: combine · X: contradiction (dashed)';
   $('replay-count').textContent=`${state.count} / ${data.plans.length}`;$('timeline').value=state.count;
   $('timeline').setAttribute('aria-valuetext',`${state.count} finished Plans`);
-  $('replay-status').textContent=state.followups?'Selected strategy and its direct follow-ups highlighted.':state.count===0?'Baseline established. Replay to reveal finished Plans.':state.count===data.plans.length?`All ${data.plans.length} Plans shown${slug==='reward'?' · 14 evaluated, 1 failed':''}.`:`${state.count} Plans finished · ${state.selected}: ${title(state.selected)}`;
+  $('replay-status').textContent=state.followups?'Selected strategy and its direct follow-ups highlighted.':state.count===0?'Baseline established. Replay to reveal finished Plans.':state.count===data.plans.length?`All ${data.plans.length} Plans shown${slug==='reward'?' · 14 evaluated, 1 failed before training':''}.`:`${state.count} Plans finished · ${state.selected}: ${title(state.selected)}`;
   const knowledge=data.knowledge.filter(k=>(k.target===state.selected||k.sources.includes(state.selected))&&plans.get(k.target).completionOrder<=state.count);
   $('knowledge-notes').hidden=state.view!=='knowledge'||!knowledge.length;
   $('knowledge-notes').innerHTML=knowledge.map(k=>`<p><strong>${k.id} · ${escape(k.title)}</strong> ${escape(k.description)}<small>${k.sources.join(' + ')} → ${k.target}</small></p>${k.quote?`<details class="knowledge-evidence"><summary>Decision evidence · ${escape(k.evidence.record)}</summary><blockquote>${escape(k.quote)}</blockquote></details>`:''}`).join('');
@@ -135,7 +135,7 @@ function renderSource(id){
   const record=window.ADE_SOURCE_DATA[slug].plans[id],script=record.script;
   if(sourceIdentity!==slug+id){$('strategy-source').open=false;sourceIdentity=slug+id}
   $('source-summary').textContent=script?`View ${slug==='reward'?'reward':'selection'} script · ${id}`:`Reward script unavailable · ${id}`;
-  $('source-note').textContent=script?'Original accepted Python artifact for this Plan. Displayed for inspection; the webpage does not execute it.':'This Plan failed Builder validation and has no accepted reward artifact.';
+  $('source-note').textContent=script?'Original accepted Python artifact for this Plan. Displayed for inspection; the webpage does not execute it.':record.failure.explanation;
   $('source-content').hidden=!script;
   $('source-code').textContent=script?.text||'';
   $('source-filename').textContent=script?.filename||'';

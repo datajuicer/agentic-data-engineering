@@ -5,7 +5,7 @@
 **ADE — agents that develop data selection, reward and curriculum strategies through controlled experiments.**
 
 <!-- [Live Demo](https://ade-code-research.ruomengd.chatgpt.site) -->
-[🚀 Quickstart](docs/en/quickstart.md) · [🧭 Walkthrough](docs/en/walkthrough.md) · [📚 Documentation](docs/en/README.md) · [📄 Paper](https://arxiv.org/pdf/2610.14238)
+[🏠 Homepage](examples/code-research-demo/README.md) · [🚀 Quickstart](docs/en/quickstart.md) · [🧭 Walkthrough](docs/en/walkthrough.md) · [📚 Documentation](docs/en/README.md) · [📄 Paper](https://arxiv.org/pdf/2610.14238)
 
 </div>
 
@@ -13,11 +13,6 @@ LLM data engineering requires iterative experimentation on data selection, rewar
 
 **Start here:** [Install](docs/en/installation.md) → [Prepare inputs](docs/en/data-preparation.md) →
 [Configure deployment](docs/en/deployment.md) → [Give an Operation Prompt to the operator agent](docs/en/quickstart.md).
-
-**[Homepage](examples/code-research-demo/README.md)** —
-Explore the paper's method, four-task results and findings, then follow three
-recorded research trajectories for math selection, code selection and reward design.
-Open the local page in a browser; no installation is required.
 
 ## Framework
 

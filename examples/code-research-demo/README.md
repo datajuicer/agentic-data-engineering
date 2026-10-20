@@ -3,6 +3,8 @@
 [Homepage](https://datajuicer.github.io/agentic-data-engineering/) is published
 through this repository's GitHub Pages workflow. Changes to this directory on
 `main` deploy automatically.
+Deployment refreshes content-based asset versions so updated styles and scripts
+do not reuse an older cached URL.
 
 Open [index.html](index.html) in a browser. The complete directory is a buildless,
 offline-capable research homepage and can be served by any static host. The
@@ -65,6 +67,7 @@ From the repository root, with Node.js 22+ and `unzip` installed:
 node scripts/export_research_demo.mjs <RESTORED_ARCHIVE_ROOT>
 node scripts/export_homepage_evidence.mjs <RESTORED_ARCHIVE_ROOT>
 node scripts/export_paper_results.mjs <EXTRACTED_PAPER_SOURCE>
+node scripts/version_homepage_assets.mjs
 ```
 
 The restored root contains `repositories/agentic-data-engineering/`. The paper

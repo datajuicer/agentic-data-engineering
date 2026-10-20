@@ -6,6 +6,7 @@ on:
     paths:
       - "examples/code-research-demo/**"
       - ".github/workflows/pages.yml"
+      - "scripts/version_homepage_assets.mjs"
   workflow_dispatch:
 
 permissions:
@@ -28,6 +29,8 @@ jobs:
         uses: actions/checkout@v6
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Version homepage assets
+        run: node scripts/version_homepage_assets.mjs
       - name: Upload homepage
         uses: actions/upload-pages-artifact@v4
         with:
